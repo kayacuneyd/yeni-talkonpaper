@@ -1,14 +1,23 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{% if title %}{{ title }} · {% endif %}TalkOnPaper</title>
-    <meta name="description" content="TalkOnPaper brings published research to life with English-dubbed video explanations from scholars worldwide." />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:wght@500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+    <meta
+      name="description"
+      content="TalkOnPaper brings published research to life with English-dubbed video explanations from scholars worldwide."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
     {% if canonical_url %}
     <link rel="canonical" href="{{ canonical_url }}" />
     {% endif %}
@@ -18,7 +27,9 @@
       <div class="container nav-inner">
         <div class="brand">
           <a href="{{ url_for('main.home') }}">TalkOnPaper</a>
-          <span class="tagline">Academic videos grounded in published papers</span>
+          <span class="tagline"
+            >Academic videos grounded in published papers</span
+          >
         </div>
         <nav class="nav-links">
           <a href="{{ url_for('main.talks_archive') }}">Talks</a>
@@ -31,23 +42,24 @@
     </header>
 
     <main class="page">
-      {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-          <div class="container">
-            {% for category, message in messages %}
-              <div class="alert {{ category }}">{{ message }}</div>
-            {% endfor %}
-          </div>
-        {% endif %}
-      {% endwith %}
-      {% block content %}{% endblock %}
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %}
+      <div class="container">
+        {% for category, message in messages %}
+        <div class="alert {{ category }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+      {% endif %} {% endwith %} {% block content %}{% endblock %}
     </main>
 
     <footer class="site-footer">
       <div class="container footer-grid">
         <div>
           <div class="brand">TalkOnPaper</div>
-          <p class="muted">Cross-border academic visibility without visas, language, or geography barriers.</p>
+          <p class="muted">
+            Cross-border academic visibility without visas, language, or
+            geography barriers.
+          </p>
         </div>
         <div>
           <p class="eyebrow">Explore</p>
@@ -64,7 +76,7 @@
       </div>
       <div class="container footer-meta">
         <span>SQLite + Cloudflare R2 · SEO-first · Archive-ready</span>
-        <span>&copy; {{ 2025 }}</span>
+        <span>Developed by Cüneyt Kaya in Kornwestheim &copy; {{ 2025 }}</span>
       </div>
     </footer>
   </body>
