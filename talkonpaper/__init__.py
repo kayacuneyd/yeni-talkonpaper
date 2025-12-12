@@ -6,6 +6,7 @@ from flask import Flask
 from .config import Config
 from .extensions import db, login_manager, register_sqlite_pragmas
 from .routes import main_bp
+from .admin import admin_bp
 
 
 def create_app(test_config: dict | None = None) -> Flask:
@@ -46,6 +47,7 @@ def _configure_extensions(app: Flask) -> None:
 
 def _register_blueprints(app: Flask) -> None:
     app.register_blueprint(main_bp)
+    app.register_blueprint(admin_bp)
 
 
 def _register_template_globals(app: Flask) -> None:

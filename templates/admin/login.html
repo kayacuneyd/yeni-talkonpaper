@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="container" style="max-width:520px;">
+    <div class="surface">
+      <p class="eyebrow">Admin giriş</p>
+      <h1>Yönetim paneline erişim</h1>
+      <p class="muted">Yalnızca ekip içi kullanım. Şifreyi bilmiyorsanız proje sahibine danışın.</p>
+      <form method="post" class="stack" style="margin-top:16px;">
+        <label class="input-label">
+          Şifre
+          <input type="password" name="password" placeholder="Admin password" required />
+        </label>
+        <button type="submit" class="btn primary" style="width:100%;">Giriş yap</button>
+        {% if error %}
+          <div class="alert error">{{ error }}</div>
+        {% endif %}
+      </form>
+    </div>
+  </div>
+{% endblock %}

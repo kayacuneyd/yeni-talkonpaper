@@ -31,40 +31,210 @@ def _seed_sample_data() -> None:
         _seeded = True
         return
 
-    speaker = Speaker(
-        full_name="Dr. Amina Patel",
-        affiliation="University of Cape Town",
-        country="South Africa",
-        bio_short="Climate resilience researcher focusing on adaptive water systems.",
-        website_or_profile="https://example.org/amina-patel",
-    )
-    paper = Paper(
-        title="Adaptive Water Infrastructure for Semi-Arid Regions",
-        abstract="Study on modular water systems enabling resilience against droughts.",
-        authors="Amina Patel, Javier Ruiz",
-        doi_or_url="10.1234/adapt-water.2025",
-        journal_or_publisher="Journal of Climate Adaptation",
-        publication_year=2025,
-        language_original="en",
-        keywords="climate,water,infrastructure",
-    )
-    talk = Talk(
-        paper=paper,
-        speaker=speaker,
-        title="Adaptive Water Infrastructure for Semi-Arid Regions",
-        summary="Explains modular design choices and long-term sustainability outcomes.",
-        duration_seconds=780,
-        talk_date=date(2025, 3, 12),
-        access_level="public",
-        is_dubbed=True,
-        video_object_key="samples/talks/adaptive-water.mp4",
-        preview_video_key="samples/talks/adaptive-water-preview.mp4",
-        audio_object_key="samples/talks/adaptive-water.mp3",
-        thumbnail_object_key="samples/talks/adaptive-water.jpg",
-        transcript_text="Transcript placeholder for demonstration.",
-    )
+    sample_media = "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+    thumb = "https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=1200"
 
-    db.session.add_all([speaker, paper, talk])
+    samples = [
+        {
+            "speaker": {
+                "full_name": "Dr. Amina Patel",
+                "affiliation": "University of Cape Town",
+                "country": "South Africa",
+                "bio_short": "Climate resilience researcher focusing on adaptive water systems.",
+                "website_or_profile": "https://example.org/amina-patel",
+            },
+            "paper": {
+                "title": "Adaptive Water Infrastructure for Semi-Arid Regions",
+                "abstract": "Modular water systems enabling resilience against droughts.",
+                "authors": "Amina Patel, Javier Ruiz",
+                "doi_or_url": "10.1234/adapt-water.2025",
+                "journal_or_publisher": "Journal of Climate Adaptation",
+                "publication_year": 2025,
+                "language_original": "en",
+                "keywords": "climate,water,infrastructure",
+            },
+            "talk": {
+                "title": "Adaptive Water Infrastructure for Semi-Arid Regions",
+                "summary": "Design choices and long-term sustainability outcomes.",
+                "duration_seconds": 780,
+                "talk_date": date(2025, 3, 12),
+                "access_level": "public",
+                "is_dubbed": True,
+                "video_object_key": sample_media,
+                "preview_video_key": sample_media,
+                "audio_object_key": sample_media,
+                "thumbnail_object_key": thumb,
+                "transcript_text": "Transcript placeholder for demonstration.",
+            },
+        },
+        {
+            "speaker": {
+                "full_name": "Prof. Mei Lin",
+                "affiliation": "Nanyang Technological University",
+                "country": "Singapore",
+                "bio_short": "AI for low-resource languages and speech synthesis.",
+                "website_or_profile": "https://example.org/mei-lin",
+            },
+            "paper": {
+                "title": "Cross-lingual Speech Synthesis with Minimal Pairs",
+                "abstract": "A framework for dubbing academic talks across languages.",
+                "authors": "Mei Lin, Carlos Alvarez",
+                "doi_or_url": "10.2345/speech.2024.77",
+                "journal_or_publisher": "Transactions on Speech Processing",
+                "publication_year": 2024,
+                "language_original": "zh",
+                "keywords": "speech,ai,dubbing",
+            },
+            "talk": {
+                "title": "Cross-lingual Speech Synthesis for Researchers",
+                "summary": "How to retain speaker intent when dubbing to English.",
+                "duration_seconds": 640,
+                "talk_date": date(2024, 11, 2),
+                "access_level": "academic_premium",
+                "is_dubbed": True,
+                "video_object_key": sample_media,
+                "preview_video_key": sample_media,
+                "audio_object_key": sample_media,
+                "thumbnail_object_key": "https://images.pexels.com/photos/1181316/pexels-photo-1181316.jpeg?auto=compress&cs=tinysrgb&w=1200",
+                "transcript_text": "We describe a cross-lingual pipeline...",
+            },
+        },
+        {
+            "speaker": {
+                "full_name": "Dr. Javier Ruiz",
+                "affiliation": "Universidad de los Andes",
+                "country": "Colombia",
+                "bio_short": "Hydrology and climate adaptation in Latin America.",
+                "website_or_profile": "https://example.org/javier-ruiz",
+            },
+            "paper": {
+                "title": "River Basin Modeling Under Rapid Urbanization",
+                "abstract": "Simulation of flood risks in growing cities.",
+                "authors": "Javier Ruiz, Ana Gómez",
+                "doi_or_url": "10.5678/river.2023.44",
+                "journal_or_publisher": "Urban Hydrology",
+                "publication_year": 2023,
+                "language_original": "es",
+                "keywords": "hydrology,urban,flood",
+            },
+            "talk": {
+                "title": "Protecting River Basins Amid Urban Growth",
+                "summary": "Modeling flood risks and mitigation strategies.",
+                "duration_seconds": 910,
+                "talk_date": date(2024, 2, 14),
+                "access_level": "public",
+                "is_dubbed": True,
+                "video_object_key": sample_media,
+                "preview_video_key": sample_media,
+                "audio_object_key": sample_media,
+                "thumbnail_object_key": "https://images.pexels.com/photos/1181243/pexels-photo-1181243.jpeg?auto=compress&cs=tinysrgb&w=1200",
+                "transcript_text": "We analyze river basin pressures...",
+            },
+        },
+        {
+            "speaker": {
+                "full_name": "Dr. Laila Haddad",
+                "affiliation": "American University of Beirut",
+                "country": "Lebanon",
+                "bio_short": "Public health policy for displaced communities.",
+                "website_or_profile": "https://example.org/laila-haddad",
+            },
+            "paper": {
+                "title": "Telehealth Protocols for Refugee Health Networks",
+                "abstract": "Operational playbook for cross-border telehealth delivery.",
+                "authors": "Laila Haddad, Omar Darwish",
+                "doi_or_url": "10.7890/telehealth.2024",
+                "journal_or_publisher": "Global Public Health",
+                "publication_year": 2024,
+                "language_original": "ar",
+                "keywords": "health,telemedicine,refugee",
+            },
+            "talk": {
+                "title": "Telehealth for Displaced Communities",
+                "summary": "Protocol design, data stewardship, and clinician training.",
+                "duration_seconds": 720,
+                "talk_date": date(2024, 9, 1),
+                "access_level": "registered",
+                "is_dubbed": True,
+                "video_object_key": sample_media,
+                "preview_video_key": sample_media,
+                "audio_object_key": sample_media,
+                "thumbnail_object_key": "https://images.pexels.com/photos/1181449/pexels-photo-1181449.jpeg?auto=compress&cs=tinysrgb&w=1200",
+                "transcript_text": "Telehealth playbook overview...",
+            },
+        },
+        {
+            "speaker": {
+                "full_name": "Prof. Adeola Ogun",
+                "affiliation": "University of Lagos",
+                "country": "Nigeria",
+                "bio_short": "Solar microgrids and community energy finance.",
+                "website_or_profile": "https://example.org/adeola-ogun",
+            },
+            "paper": {
+                "title": "Financing Solar Microgrids for Rural Clinics",
+                "abstract": "Economic model for resilient clinic power.",
+                "authors": "Adeola Ogun, Fatima Bello",
+                "doi_or_url": "10.4455/microgrid.2022",
+                "journal_or_publisher": "Energy Policy Letters",
+                "publication_year": 2022,
+                "language_original": "en",
+                "keywords": "energy,finance,health",
+            },
+            "talk": {
+                "title": "Solar Microgrids That Keep Clinics Online",
+                "summary": "Financing, reliability, and maintenance insights.",
+                "duration_seconds": 840,
+                "talk_date": date(2023, 11, 5),
+                "access_level": "public",
+                "is_dubbed": True,
+                "video_object_key": sample_media,
+                "preview_video_key": sample_media,
+                "audio_object_key": sample_media,
+                "thumbnail_object_key": "https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=1200",
+                "transcript_text": "Community energy financing models...",
+            },
+        },
+        {
+            "speaker": {
+                "full_name": "Dr. Sofia Mendes",
+                "affiliation": "University of São Paulo",
+                "country": "Brazil",
+                "bio_short": "Marine conservation and reef restoration.",
+                "website_or_profile": "https://example.org/sofia-mendes",
+            },
+            "paper": {
+                "title": "AI-Assisted Coral Reef Monitoring",
+                "abstract": "Using computer vision to track reef recovery.",
+                "authors": "Sofia Mendes, Thiago Costa",
+                "doi_or_url": "10.9134/coral.2025",
+                "journal_or_publisher": "Marine Ecology Reports",
+                "publication_year": 2025,
+                "language_original": "pt",
+                "keywords": "coral,ai,conservation",
+            },
+            "talk": {
+                "title": "AI for Coral Reef Restoration",
+                "summary": "How remote sensing accelerates conservation.",
+                "duration_seconds": 690,
+                "talk_date": date(2025, 4, 22),
+                "access_level": "public",
+                "is_dubbed": True,
+                "video_object_key": sample_media,
+                "preview_video_key": sample_media,
+                "audio_object_key": sample_media,
+                "thumbnail_object_key": "https://images.pexels.com/photos/1181459/pexels-photo-1181459.jpeg?auto=compress&cs=tinysrgb&w=1200",
+                "transcript_text": "Reef monitoring pipeline...",
+            },
+        },
+    ]
+
+    for item in samples:
+        speaker = Speaker(**item["speaker"])
+        paper = Paper(**item["paper"])
+        talk = Talk(paper=paper, speaker=speaker, **item["talk"])
+        db.session.add_all([speaker, paper, talk])
+
     db.session.commit()
     _seeded = True
 

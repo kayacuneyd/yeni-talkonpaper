@@ -26,9 +26,14 @@ def r2_client():
 def signed_url(object_key: str, expires_in: Optional[int] = None) -> Optional[str]:
     """
     Generate a time-limited signed URL for secure media delivery.
+    If a full URL is provided (http/https), return it directly to allow
+    external demo assets without R2 credentials.
     """
     if not object_key:
         return None
+
+    if object_key.startswith("http://") or object_key.startswith("https://"):
+        return object_key
 
     cfg = current_app.config
     expiry = expires_in or cfg.get("SIGNED_URL_EXPIRATION", 900)

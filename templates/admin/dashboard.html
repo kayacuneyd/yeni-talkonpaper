@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <p class="eyebrow">Admin panel</p>
+        <h1>İçerik kontrolü</h1>
+        <p class="muted">Konuşma, makale ve konuşmacı detaylarını buradan yönetin.</p>
+      </div>
+      <div class="cta-row">
+        <a class="btn ghost" href="{{ url_for('admin.logout') }}">Çıkış</a>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="badge">Özet</div>
+        <h3>Durum</h3>
+        <div class="data-row"><strong>Talks</strong><span>{{ stats.talks }}</span></div>
+        <div class="data-row"><strong>Papers</strong><span>{{ stats.papers }}</span></div>
+        <div class="data-row"><strong>Speakers</strong><span>{{ stats.speakers }}</span></div>
+      </div>
+      <div class="card">
+        <div class="badge alt">Son konuşmalar</div>
+        {% if latest_talks %}
+          <ul class="list">
+            {% for talk in latest_talks %}
+              <li>
+                <div>
+                  <strong>{{ talk.title }}</strong><br />
+                  <span class="muted">{{ talk.speaker.full_name }} · {{ talk.paper.publication_year }}</span>
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="muted">Henüz konuşma yok.</p>
+        {% endif %}
+      </div>
+      <div class="card">
+        <div class="badge">Son makaleler</div>
+        {% if latest_papers %}
+          <ul class="list">
+            {% for paper in latest_papers %}
+              <li>
+                <div>
+                  <strong>{{ paper.title }}</strong><br />
+                  <span class="muted">{{ paper.authors }}</span>
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="muted">Henüz makale yok.</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <section style="margin-top:28px;">
+      <div class="section-header">
+        <h2>Hızlı ekleme</h2>
+        <p class="muted">Bir konuşmacı + makale + konuşmayı aynı anda ekleyin.</p>
+      </div>
+      <form class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:16px;" method="post" action="{{ url_for('admin.create_talk') }}">
+        <div class="surface">
+          <p class="eyebrow">Konuşmacı</p>
+          <label class="input-label">İsim
+            <input type="text" name="speaker_name" required placeholder="Dr. Amina Patel" />
+          </label>
+          <label class="input-label">Kurum
+            <input type="text" name="speaker_affiliation" required placeholder="University of Cape Town" />
+          </label>
+          <label class="input-label">Ülke
+            <input type="text" name="speaker_country" placeholder="South Africa" />
+          </label>
+          <label class="input-label">Kısa bio
+            <textarea name="speaker_bio" rows="3" placeholder="Research focus, lab, awards"></textarea>
+          </label>
+          <label class="input-label">Web / profil
+            <input type="url" name="speaker_site" placeholder="https://example.org/profile" />
+          </label>
+        </div>
+
+        <div class="surface">
+          <p class="eyebrow">Makale</p>
+          <label class="input-label">Başlık
+            <input type="text" name="paper_title" required placeholder="Adaptive Water Infrastructure" />
+          </label>
+          <label class="input-label">Yazarlar
+            <input type="text" name="paper_authors" required placeholder="A. Patel, J. Ruiz" />
+          </label>
+          <label class="input-label">DOI / URL
+            <input type="text" name="paper_doi" required placeholder="10.xxxx/xxxx" />
+          </label>
+          <label class="input-label">Yıl
+            <input type="number" name="paper_year" required min="1900" max="2100" />
+          </label>
+          <label class="input-label">Dil
+            <input type="text" name="paper_language" placeholder="en" />
+          </label>
+          <label class="input-label">Dergi / Yayıncı
+            <input type="text" name="paper_journal" placeholder="Journal of Climate Adaptation" />
+          </label>
+          <label class="input-label">Anahtar kelimeler
+            <input type="text" name="paper_keywords" placeholder="climate, water, infrastructure" />
+          </label>
+          <label class="input-label">PDF object key
+            <input type="text" name="paper_pdf_key" placeholder="uploads/paper.pdf" />
+          </label>
+          <label class="input-label">Özet
+            <textarea name="paper_abstract" rows="3" placeholder="Short abstract..."></textarea>
+          </label>
+        </div>
+
+        <div class="surface">
+          <p class="eyebrow">Konuşma</p>
+          <label class="input-label">Başlık
+            <input type="text" name="talk_title" required placeholder="Adaptive Water Infrastructure" />
+          </label>
+          <label class="input-label">Özet
+            <textarea name="talk_summary" rows="3" placeholder="Short summary"></textarea>
+          </label>
+          <label class="input-label">Süre (saniye)
+            <input type="number" name="talk_duration" min="0" placeholder="780" />
+          </label>
+          <label class="input-label">Konuşma tarihi
+            <input type="date" name="talk_date" />
+          </label>
+          <label class="input-label">Erişim seviyesi
+            <select name="access_level">
+              <option value="public">Public</option>
+              <option value="registered">Registered</option>
+              <option value="academic_premium">Academic premium</option>
+            </select>
+          </label>
+          <label class="input-label"><input type="checkbox" name="is_dubbed" /> İngilizce dublaj</label>
+          <label class="input-label">Video object key
+            <input type="text" name="video_object_key" required placeholder="media/talk.mp4" />
+          </label>
+          <label class="input-label">Preview video key
+            <input type="text" name="preview_video_key" placeholder="media/preview.mp4" />
+          </label>
+          <label class="input-label">Audio object key
+            <input type="text" name="audio_object_key" placeholder="media/talk.mp3" />
+          </label>
+          <label class="input-label">Thumbnail key
+            <input type="text" name="thumbnail_object_key" placeholder="media/thumb.jpg" />
+          </label>
+          <label class="input-label">Transkript
+            <textarea name="transcript_text" rows="3" placeholder="Full transcript..."></textarea>
+          </label>
+          <button type="submit" class="btn primary" style="width:100%; margin-top:10px;">Konuşma oluştur</button>
+        </div>
+      </form>
+    </section>
+  </div>
+{% endblock %}

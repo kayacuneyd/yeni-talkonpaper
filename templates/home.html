@@ -3,42 +3,83 @@
   <div class="container">
     <section class="hero">
       <div>
-        <p class="eyebrow">Global South first</p>
-        <h1>Published papers, translated into clear video explanations.</h1>
-        <p>TalkOnPaper removes visa, language, and geography barriers so scholars can share research as English-dubbed videos, hosted with CDN performance and citation-ready pages.</p>
+        <p class="eyebrow">Scholar-first video abstracts</p>
+        <h1>Make your paper speak for itself.</h1>
+        <p>TalkOnPaper transforms peer-reviewed research into English-dubbed, citable video explainers—ready for conferences, funders, and global learners without extra studio work.</p>
         <div class="cta-row">
-          <a class="btn primary" href="{{ url_for('main.talks_archive') }}">Browse Talks</a>
-          <a class="btn ghost" href="{{ url_for('main.premium') }}">See Premium dubbing</a>
+          <a class="btn primary" href="{{ url_for('main.talks_archive') }}">Browse talks</a>
+          <a class="btn secondary" href="{{ url_for('main.premium') }}">Premium dubbing</a>
+        </div>
+        <div class="stats">
+          <div class="stat"><strong>DOI-first</strong><span class="muted">Every talk maps to a verified paper</span></div>
+          <div class="stat"><strong>English dubbed</strong><span class="muted">Humanlike audio with captions</span></div>
+          <div class="stat"><strong>SEO ready</strong><span class="muted">VideoObject + Article metadata baked in</span></div>
         </div>
       </div>
-      <div class="surface">
-        <p class="eyebrow">Platform checklist</p>
-        <ul class="list">
-          <li><span class="badge">Verified papers</span> DOI/URL required before publishing a Talk</li>
-          <li><span class="badge premium">English dubbing</span> AI-assisted voice with human review option</li>
-          <li><span class="badge">SEO-first</span> Structured data for Article, VideoObject, Person</li>
-          <li><span class="badge">Archive</span> SQLite + Cloudflare R2, designed for decades</li>
-        </ul>
+      <div class="hero-media">
+        <img class="hero-img" src="{{ url_for('static', filename='Wrapper.png') }}" alt="TalkOnPaper arayüz önizlemesi" loading="lazy" />
+        <div class="hero-note">Figma’dan aktarılan UI önizlemesi</div>
       </div>
     </section>
 
-    <div class="section-header">
-      <h2>Featured Talks</h2>
-      <a href="{{ url_for('main.talks_archive') }}">View archive →</a>
-    </div>
-    <div class="grid">
-      {% for talk in featured_talks %}
+    <section>
+      <div class="section-header">
+        <h2>Why teams host on TalkOnPaper</h2>
+        <a href="{{ url_for('main.premium') }}">Pricing & premium →</a>
+      </div>
+      <div class="grid">
         <article class="card">
-          <div class="pill-text">{{ talk.access_level|capitalize }} access</div>
-          <h3><a href="{{ url_for('main.talk_detail', talk_id=talk.id, slug=talk.slug) }}">{{ talk.title }}</a></h3>
-          <p class="meta">{{ talk.speaker.full_name }} · {{ talk.speaker.affiliation }}</p>
-          <p class="muted">{{ talk.summary or "English-dubbed explanation of a published paper." }}</p>
-          <div class="chip">{{ talk.duration_minutes }} min</div>
-          {% if talk.is_dubbed %}<div class="chip">Dubbed</div>{% endif %}
+          <div class="badge">Built for citations</div>
+          <h3>Every video points back to the paper.</h3>
+          <p class="muted">Canonical URLs, DOI/URL validation, and a transcript block that makes your work indexable for search and university libraries.</p>
         </article>
-      {% else %}
-        <p class="muted">No talks yet. Add your first paper to seed the archive.</p>
-      {% endfor %}
-    </div>
+        <article class="card">
+          <div class="badge alt">Distribution ready</div>
+          <h3>Shareable in 10 minutes.</h3>
+          <p class="muted">Preview clips for conferences, signed full videos for partners, and QR-ready links for posters or talks.</p>
+        </article>
+        <article class="card">
+          <div class="badge">Inclusive by default</div>
+          <h3>Dubbing that respects the speaker.</h3>
+          <p class="muted">English voiceover with regional accents, plus optional human review for grant committees or journals.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-header">
+        <h2>Featured talks</h2>
+        <a href="{{ url_for('main.talks_archive') }}">View archive →</a>
+      </div>
+      <div class="grid">
+        {% for talk in featured_talks %}
+          <article class="card">
+            <div class="pill-text">{{ talk.access_level|capitalize }} access</div>
+            <h3><a href="{{ url_for('main.talk_detail', talk_id=talk.id, slug=talk.slug) }}">{{ talk.title }}</a></h3>
+            <p class="meta">{{ talk.speaker.full_name }} · {{ talk.speaker.affiliation }}</p>
+            <p class="muted">{{ talk.summary or "English-dubbed explanation of a published paper." }}</p>
+            <div class="chip">{{ talk.duration_minutes }} min</div>
+            {% if talk.is_dubbed %}<div class="chip">Dubbed</div>{% endif %}
+          </article>
+        {% else %}
+          <p class="muted">No talks yet. Add your first paper to seed the archive.</p>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="section-contrast">
+      <div class="section-header" style="margin:0 0 12px;">
+        <div>
+          <p class="eyebrow">CTA band</p>
+          <h2>Hazır örnekleri inceleyin, kendi konuşmanızı ekleyin.</h2>
+        </div>
+        <a class="btn primary" href="{{ url_for('admin.dashboard') }}">Admin paneline gir</a>
+      </div>
+      <p class="muted">Açık kaynak Pexels görselleri ve örnek mp4 linkleriyle tam fonksiyonel bir demo: konuşmacı profilleri, makale detayları, konuşma videoları.</p>
+      <div class="cta-row">
+        <a class="btn secondary" href="{{ url_for('main.premium') }}">Premium seçenekler</a>
+        <a class="btn ghost" href="{{ url_for('main.talks_archive') }}">Arşivi gez</a>
+      </div>
+    </section>
   </div>
 {% endblock %}
