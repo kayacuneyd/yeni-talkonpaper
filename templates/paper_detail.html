@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="container">
+    <p class="eyebrow">Paper</p>
+    <h1>{{ paper.title }}</h1>
+    <p class="muted">{{ paper.authors }} · {{ paper.journal_or_publisher or "Published research" }} · {{ paper.publication_year }}</p>
+
+    <div class="two-col">
+      <div class="surface">
+        <p class="eyebrow">Abstract</p>
+        <p class="serif">{{ paper.abstract }}</p>
+        {% if paper.keywords %}
+          <p class="eyebrow">Keywords</p>
+          {% for kw in paper.keywords.split(",") %}
+            <span class="chip">{{ kw.strip() }}</span>
+          {% endfor %}
+        {% endif %}
+      </div>
+      <div class="stack">
+        <div class="surface">
+          <p class="eyebrow">Metadata</p>
+          <div class="data-row"><strong>DOI/URL</strong><span class="muted">{{ paper.doi_or_url }}</span></div>
+          <div class="data-row"><strong>Language</strong><span>{{ paper.language_original|upper }}</span></div>
+          <div class="data-row"><strong>Verified</strong><span>{{ "Yes" if paper.verified_reference() else "Needs review" }}</span></div>
+        </div>
+        <div class="surface">
+          <p class="eyebrow">Talk</p>
+          {% if paper.talk %}
+            <p class="muted">This paper has an associated Talk.</p>
+            <a class="btn primary" href="{{ url_for('main.talk_detail', talk_id=paper.talk.id, slug=paper.talk.slug) }}">Watch Talk</a>
+          {% else %}
+            <p class="muted">Talk not yet created.</p>
+            <a class="btn ghost" href="{{ url_for('main.premium') }}">Request dubbing</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

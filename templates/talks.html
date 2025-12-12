@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <p class="eyebrow">Talks archive</p>
+        <h2>English-dubbed explanations tied to published papers</h2>
+      </div>
+      <a class="btn ghost" href="{{ url_for('main.premium') }}">Upgrade for dubbing</a>
+    </div>
+
+    <form method="get" class="search-bar">
+      <input type="search" name="q" value="{{ search or '' }}" placeholder="Search by title or topic" />
+      <button type="submit">Search</button>
+    </form>
+
+    <div class="grid">
+      {% for talk in talks %}
+        <article class="card">
+          <div class="pill-text">{{ talk.access_level|capitalize }} access</div>
+          <h3><a href="{{ url_for('main.talk_detail', talk_id=talk.id, slug=talk.slug) }}">{{ talk.title }}</a></h3>
+          <p class="meta">{{ talk.speaker.full_name }} · {{ talk.speaker.affiliation }}</p>
+          <p class="muted">{{ talk.summary or talk.paper.abstract[:150] ~ "…" }}</p>
+          <div class="chip">{{ talk.duration_minutes }} min</div>
+          <div class="chip">{{ talk.paper.publication_year }}</div>
+          {% if talk.is_dubbed %}<div class="chip">Dubbed</div>{% endif %}
+        </article>
+      {% else %}
+        <p class="muted">No talks found. Adjust filters or add a verified paper.</p>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <p class="eyebrow">Paper index</p>
+        <h2>Published research linked to Talks</h2>
+      </div>
+    </div>
+
+    <form method="get" class="search-bar">
+      <input type="number" name="year" value="{{ year or '' }}" placeholder="Filter by year" min="1900" max="2100" />
+      <button type="submit">Filter</button>
+    </form>
+
+    <div class="grid">
+      {% for paper in papers %}
+        <article class="card">
+          <p class="pill-text">Published {{ paper.publication_year }}</p>
+          <h3><a href="{{ url_for('main.paper_detail', paper_id=paper.id) }}">{{ paper.title }}</a></h3>
+          <p class="meta">{{ paper.authors }}</p>
+          <p class="muted">{{ paper.abstract[:180] }}{% if paper.abstract|length > 180 %}…{% endif %}</p>
+          {% if paper.talk %}
+            <div class="chip">Talk available</div>
+          {% else %}
+            <div class="chip">Talk pending</div>
+          {% endif %}
+        </article>
+      {% else %}
+        <p class="muted">No papers yet. Add a verified DOI or publication URL to start.</p>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

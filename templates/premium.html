@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="container">
+    <div class="hero">
+      <div>
+        <p class="eyebrow">Premium service</p>
+        <h1>English auto-dubbing + permanent, citable Talk pages.</h1>
+        <p>For scholars and institutions who need international visibility without travel. We ingest your recorded explanation, verify the paper, dub to English, and host with Cloudflare CDN.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="mailto:hello@talkonpaper.example">Start a premium submission</a>
+          <a class="btn ghost" href="{{ url_for('main.talks_archive') }}">Browse examples</a>
+        </div>
+      </div>
+      <div class="surface">
+        <p class="eyebrow">What you get</p>
+        <ul class="list">
+          <li><span class="badge premium">Auto-dubbing</span> AI English voice with quality checks</li>
+          <li><span class="badge">Signed URLs</span> Secure media delivery via Cloudflare R2</li>
+          <li><span class="badge">SEO</span> Structured data for Article + VideoObject</li>
+          <li><span class="badge">Archive</span> Evergreen URL for CVs and grant links</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-header">
+      <h2>Academic-fit pricing</h2>
+    </div>
+    <div class="grid">
+      <article class="card">
+        <p class="eyebrow">Registered</p>
+        <h3>Included</h3>
+        <p class="muted">Watch full talks, access transcripts, citation-friendly links.</p>
+        <ul class="list">
+          <li>Full video access</li>
+          <li>Transcript download</li>
+          <li>Basic SEO metadata</li>
+        </ul>
+      </article>
+      <article class="card">
+        <p class="eyebrow">Academic Premium</p>
+        <h3>Service</h3>
+        <p class="muted">We process your video and publish a citable Talk page.</p>
+        <ul class="list">
+          <li>English auto-dubbing + QC</li>
+          <li>Hosted mp4/mp3 + previews</li>
+          <li>Canonical Talk page + DOI/URL reference</li>
+          <li>Analytics-ready metadata</li>
+        </ul>
+        <a class="btn primary" href="mailto:hello@talkonpaper.example">Request a quote</a>
+      </article>
+    </div>
+  </div>
+{% endblock %}

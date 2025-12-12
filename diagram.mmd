@@ -1,0 +1,22 @@
+graph TD
+    Paper["📄 Paper<br/>- title<br/>- abstract<br/>- authors<br/>- publication_date"] --> Talk["🎤 Talk<br/>- title<br/>- description<br/>- duration<br/>- created_at"]
+    
+    Speaker["👤 Speaker<br/>- name<br/>- bio<br/>- affiliation<br/>- expertise"] --> Talk
+    
+    Talk --> VideoMedia["🎥 Video Media<br/>- cloudflare_r2_url<br/>- format<br/>- size<br/>- duration"]
+    
+    Talk --> AudioMedia["🔊 Audio Media<br/>- cloudflare_r2_url<br/>- format<br/>- bitrate<br/>- duration"]
+    
+    User["👥 User<br/>- email<br/>- preferences<br/>- watch_history"] --> |consumes| Talk
+    
+    User --> |views| Paper
+    
+    classDef primary fill:#e1f5fe,stroke:#01579b,stroke-width:3px
+    classDef secondary fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef external fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef consumer fill:#e8f5e8,stroke:#1b5e20,stroke-width:2px
+    
+    class Paper primary
+    class Talk,Speaker secondary
+    class VideoMedia,AudioMedia external
+    class User consumer

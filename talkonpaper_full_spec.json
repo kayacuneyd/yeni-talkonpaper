@@ -1,0 +1,199 @@
+{
+  "project": {
+    "name": "TalkOnPaper",
+    "tagline": "Cross-border academic visibility without visas, language, or geography barriers",
+    "version": "1.0.0",
+    "last_updated": "2025-12-12T15:09:06.304135Z",
+    "mission": "Enable scholars—especially from the Global South—to present and circulate their published research to global academic audiences by transforming papers into English-dubbed explanatory videos, removing barriers such as visas, language, geography, and institutional access."
+  },
+  "core_principles": [
+    "Article-centric: every Talk is strictly bound to one published academic paper",
+    "Video as explanation, not opinion",
+    "Premium as service (access + academic visibility), not content paywall only",
+    "SEO-first, archive-first, evergreen content",
+    "Low-cost, open, and portable infrastructure"
+  ],
+  "content_model": {
+    "entities": {
+      "Paper": {
+        "description": "Published academic work that is the authoritative source for a Talk",
+        "required_fields": [
+          "id",
+          "title",
+          "abstract",
+          "authors",
+          "doi_or_url",
+          "journal_or_publisher",
+          "publication_year",
+          "language_original"
+        ]
+      },
+      "Talk": {
+        "description": "English-dubbed explanatory video strictly derived from a Paper",
+        "constraints": [
+          "One-to-one relationship with Paper",
+          "Cannot exist without a Paper",
+          "Must reference original publication"
+        ],
+        "required_fields": [
+          "id",
+          "paper_id",
+          "speaker_id",
+          "video_object_key",
+          "preview_video_key",
+          "duration_seconds",
+          "is_dubbed",
+          "access_level",
+          "created_at"
+        ]
+      },
+      "Speaker": {
+        "description": "Academic or domain expert presenting their own published work",
+        "required_fields": [
+          "id",
+          "full_name",
+          "affiliation",
+          "country",
+          "bio_short",
+          "website_or_profile"
+        ]
+      },
+      "User": {
+        "description": "Viewer or academic customer",
+        "required_fields": [
+          "id",
+          "email",
+          "role",
+          "subscription_level"
+        ]
+      }
+    }
+  },
+  "access_model": {
+    "tiers": {
+      "public": {
+        "access": [
+          "Paper metadata",
+          "Abstract",
+          "Speaker profile",
+          "1–2 minute preview video"
+        ]
+      },
+      "registered": {
+        "access": [
+          "Full English-dubbed video",
+          "Extended summary",
+          "References"
+        ]
+      },
+      "academic_premium": {
+        "description": "Service-oriented premium for academics",
+        "includes": [
+          "English auto-dubbing of submitted video",
+          "Audio extraction and synchronization",
+          "Permanent hosted Talk page",
+          "SEO optimization",
+          "Citation-ready URL for CV and grant use"
+        ]
+      }
+    }
+  },
+  "technical_architecture": {
+    "backend": {
+      "framework": "Flask",
+      "language": "Python",
+      "responsibilities": [
+        "Routing and SSR",
+        "Authentication",
+        "Authorization",
+        "Media access control",
+        "SEO metadata generation"
+      ]
+    },
+    "database": {
+      "engine": "SQLite (initial)",
+      "orm": "SQLAlchemy",
+      "settings": {
+        "journal_mode": "WAL",
+        "migration_path": "PostgreSQL-ready"
+      }
+    },
+    "storage": {
+      "provider": "Cloudflare R2",
+      "usage": [
+        "Video files (mp4)",
+        "Audio files (mp3)",
+        "Preview clips",
+        "PDF assets"
+      ],
+      "access": {
+        "method": "Signed URLs",
+        "cdn": "Cloudflare global CDN"
+      }
+    },
+    "frontend": {
+      "rendering": "Server-side (Jinja templates)",
+      "javascript": "Minimal / progressive enhancement",
+      "framework_required": false,
+      "optional_future": "Svelte for admin-only interfaces"
+    }
+  },
+  "auto_dubbing_pipeline": {
+    "steps": [
+      "Upload original video",
+      "Extract audio (mp3)",
+      "Speech-to-text (source language)",
+      "Translation to English",
+      "English TTS generation",
+      "Lip-sync or time-aligned audio merge",
+      "Final English-dubbed video output"
+    ],
+    "outputs": [
+      "English-dubbed mp4",
+      "English transcript",
+      "Optional subtitles"
+    ]
+  },
+  "seo_strategy": {
+    "page_types": [
+      "Talk page",
+      "Paper page",
+      "Speaker profile"
+    ],
+    "schema": [
+      "Article",
+      "VideoObject",
+      "Person"
+    ],
+    "principles": [
+      "Canonical URLs",
+      "Evergreen indexing",
+      "Author credibility (EEAT)",
+      "No duplicate content"
+    ]
+  },
+  "scalability_and_limits": {
+    "editorial_model": {
+      "simultaneous_editors": "1–3",
+      "automation": "RSS and scripted ingestion supported"
+    },
+    "performance_assumptions": {
+      "reads": "High",
+      "writes": "Low",
+      "concurrency": "Low write contention"
+    }
+  },
+  "non_goals": [
+    "Real-time social media feed",
+    "Breaking news",
+    "Collaborative document editing",
+    "High-frequency transactional workloads"
+  ],
+  "future_extensions": [
+    "PostgreSQL migration",
+    "Advanced analytics",
+    "Multilingual subtitles",
+    "API for partner institutions",
+    "Static archive export"
+  ]
+}

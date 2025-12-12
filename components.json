@@ -1,0 +1,569 @@
+{
+  "components": {
+    "Button": {
+      "purpose": "Primary interactive element for actions and navigation",
+      "props": {
+        "variant": {
+          "type": "string",
+          "options": [
+            "primary",
+            "secondary",
+            "ghost"
+          ],
+          "default": "primary"
+        },
+        "size": {
+          "type": "string",
+          "options": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md"
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false
+        },
+        "href": {
+          "type": "string",
+          "optional": true
+        },
+        "type": {
+          "type": "string",
+          "options": [
+            "button",
+            "submit",
+            "reset"
+          ],
+          "default": "button"
+        }
+      },
+      "variants": {
+        "primary": "bg-slate-800 text-white hover:bg-slate-700 focus:ring-slate-800",
+        "secondary": "bg-slate-100 text-slate-800 hover:bg-slate-200 focus:ring-slate-300",
+        "ghost": "text-slate-600 hover:bg-slate-50 focus:ring-slate-200"
+      },
+      "sizes": {
+        "sm": "px-3 py-1.5 text-sm",
+        "md": "px-4 py-2 text-base",
+        "lg": "px-6 py-3 text-lg"
+      },
+      "baseClasses": "inline-flex items-center justify-center font-medium rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed",
+      "accessibility": "Includes proper focus states, ARIA attributes, and keyboard navigation support"
+    },
+    "Input": {
+      "purpose": "Form input element for user data collection",
+      "props": {
+        "type": {
+          "type": "string",
+          "options": [
+            "text",
+            "email",
+            "password",
+            "search",
+            "url"
+          ],
+          "default": "text"
+        },
+        "label": {
+          "type": "string",
+          "required": true
+        },
+        "placeholder": {
+          "type": "string",
+          "optional": true
+        },
+        "required": {
+          "type": "boolean",
+          "default": false
+        },
+        "disabled": {
+          "type": "boolean",
+          "default": false
+        },
+        "error": {
+          "type": "string",
+          "optional": true
+        },
+        "hint": {
+          "type": "string",
+          "optional": true
+        }
+      },
+      "variants": {
+        "default": "border-slate-300 focus:border-slate-500 focus:ring-slate-500",
+        "error": "border-red-300 focus:border-red-500 focus:ring-red-500"
+      },
+      "baseClasses": "block w-full px-3 py-2 border rounded-md shadow-sm placeholder-slate-400 focus:outline-none focus:ring-1 sm:text-sm",
+      "accessibility": "Proper label association, ARIA describedby for errors and hints, required attribute support"
+    },
+    "Card": {
+      "purpose": "Container component for grouping related content with subtle elevation",
+      "props": {
+        "variant": {
+          "type": "string",
+          "options": [
+            "default",
+            "bordered",
+            "elevated"
+          ],
+          "default": "default"
+        },
+        "padding": {
+          "type": "string",
+          "options": [
+            "none",
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md"
+        },
+        "as": {
+          "type": "string",
+          "options": [
+            "div",
+            "article",
+            "section"
+          ],
+          "default": "div"
+        }
+      },
+      "variants": {
+        "default": "bg-white",
+        "bordered": "bg-white border border-slate-200",
+        "elevated": "bg-white shadow-sm border border-slate-100"
+      },
+      "padding": {
+        "none": "p-0",
+        "sm": "p-4",
+        "md": "p-6",
+        "lg": "p-8"
+      },
+      "baseClasses": "rounded-lg",
+      "accessibility": "Semantic HTML structure with appropriate ARIA landmarks when needed"
+    },
+    "Badge": {
+      "purpose": "Small status indicator or label for categorization",
+      "props": {
+        "variant": {
+          "type": "string",
+          "options": [
+            "default",
+            "success",
+            "warning",
+            "error",
+            "info"
+          ],
+          "default": "default"
+        },
+        "size": {
+          "type": "string",
+          "options": [
+            "sm",
+            "md"
+          ],
+          "default": "sm"
+        }
+      },
+      "variants": {
+        "default": "bg-slate-100 text-slate-800",
+        "success": "bg-green-100 text-green-800",
+        "warning": "bg-yellow-100 text-yellow-800",
+        "error": "bg-red-100 text-red-800",
+        "info": "bg-blue-100 text-blue-800"
+      },
+      "sizes": {
+        "sm": "px-2 py-0.5 text-xs",
+        "md": "px-2.5 py-1 text-sm"
+      },
+      "baseClasses": "inline-flex items-center rounded-full font-medium",
+      "accessibility": "Screen reader friendly with semantic meaning conveyed through text"
+    },
+    "Alert": {
+      "purpose": "Important messages and notifications for user awareness",
+      "props": {
+        "variant": {
+          "type": "string",
+          "options": [
+            "info",
+            "success",
+            "warning",
+            "error"
+          ],
+          "default": "info"
+        },
+        "title": {
+          "type": "string",
+          "optional": true
+        },
+        "dismissible": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "variants": {
+        "info": "bg-blue-50 border-blue-200 text-blue-800",
+        "success": "bg-green-50 border-green-200 text-green-800",
+        "warning": "bg-yellow-50 border-yellow-200 text-yellow-800",
+        "error": "bg-red-50 border-red-200 text-red-800"
+      },
+      "baseClasses": "p-4 border rounded-md",
+      "accessibility": "ARIA role=alert for important messages, proper focus management for dismissible alerts"
+    },
+    "TalkCard": {
+      "purpose": "Display talk information including title, speaker, and metadata in a card format",
+      "props": {
+        "title": {
+          "type": "string",
+          "required": true
+        },
+        "speaker": {
+          "type": "string",
+          "required": true
+        },
+        "speakerAffiliation": {
+          "type": "string",
+          "required": true
+        },
+        "duration": {
+          "type": "string",
+          "required": true
+        },
+        "date": {
+          "type": "string",
+          "required": true
+        },
+        "thumbnail": {
+          "type": "string",
+          "required": true
+        },
+        "description": {
+          "type": "string",
+          "required": true
+        },
+        "tags": {
+          "type": "array",
+          "items": "string",
+          "optional": true
+        },
+        "isPremium": {
+          "type": "boolean",
+          "default": false
+        },
+        "href": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "baseClasses": "bg-white border border-slate-200 rounded-lg p-6 hover:border-slate-300 transition-colors",
+      "accessibility": "Semantic article structure, proper heading hierarchy, alt text for thumbnails",
+      "seo": "Structured data markup for academic content, proper heading tags for indexing"
+    },
+    "TalkVideoPlayer": {
+      "purpose": "Video player component with academic-focused controls and transcript integration",
+      "props": {
+        "src": {
+          "type": "string",
+          "required": true
+        },
+        "poster": {
+          "type": "string",
+          "required": true
+        },
+        "title": {
+          "type": "string",
+          "required": true
+        },
+        "transcript": {
+          "type": "string",
+          "optional": true
+        },
+        "chapters": {
+          "type": "array",
+          "items": "object",
+          "optional": true
+        },
+        "autoplay": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "baseClasses": "w-full bg-black rounded-lg overflow-hidden",
+      "accessibility": "Full keyboard navigation, closed captions support, transcript availability",
+      "seo": "Video structured data, transcript indexing for search engines"
+    },
+    "PaperMetadataBox": {
+      "purpose": "Display academic paper metadata including authors, publication info, and citations",
+      "props": {
+        "title": {
+          "type": "string",
+          "required": true
+        },
+        "authors": {
+          "type": "array",
+          "items": "object",
+          "required": true
+        },
+        "journal": {
+          "type": "string",
+          "optional": true
+        },
+        "year": {
+          "type": "string",
+          "required": true
+        },
+        "doi": {
+          "type": "string",
+          "optional": true
+        },
+        "abstract": {
+          "type": "string",
+          "required": true
+        },
+        "keywords": {
+          "type": "array",
+          "items": "string",
+          "optional": true
+        },
+        "citationCount": {
+          "type": "number",
+          "optional": true
+        }
+      },
+      "baseClasses": "bg-slate-50 border border-slate-200 rounded-lg p-6",
+      "accessibility": "Semantic structure with proper headings and lists",
+      "seo": "Academic metadata schema, proper citation formatting for indexing"
+    },
+    "SpeakerProfileCard": {
+      "purpose": "Display speaker information including bio, affiliation, and credentials",
+      "props": {
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "title": {
+          "type": "string",
+          "required": true
+        },
+        "affiliation": {
+          "type": "string",
+          "required": true
+        },
+        "avatar": {
+          "type": "string",
+          "required": true
+        },
+        "bio": {
+          "type": "string",
+          "required": true
+        },
+        "credentials": {
+          "type": "array",
+          "items": "string",
+          "optional": true
+        },
+        "website": {
+          "type": "string",
+          "optional": true
+        },
+        "orcid": {
+          "type": "string",
+          "optional": true
+        }
+      },
+      "baseClasses": "bg-white border border-slate-200 rounded-lg p-6",
+      "accessibility": "Proper image alt text, semantic profile structure",
+      "seo": "Person schema markup, academic credentials indexing"
+    },
+    "AcademicSummarySection": {
+      "purpose": "Present structured academic content summaries with key points and conclusions",
+      "props": {
+        "title": {
+          "type": "string",
+          "required": true
+        },
+        "keyPoints": {
+          "type": "array",
+          "items": "string",
+          "required": true
+        },
+        "methodology": {
+          "type": "string",
+          "optional": true
+        },
+        "conclusions": {
+          "type": "string",
+          "required": true
+        },
+        "implications": {
+          "type": "string",
+          "optional": true
+        },
+        "expandable": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "baseClasses": "prose prose-slate max-w-none",
+      "accessibility": "Semantic content structure, expandable sections with proper ARIA states",
+      "seo": "Structured academic content for enhanced search visibility"
+    },
+    "AccessRestrictionNotice": {
+      "purpose": "Inform users about content access limitations and requirements",
+      "props": {
+        "type": {
+          "type": "string",
+          "options": [
+            "premium",
+            "institutional",
+            "embargo"
+          ],
+          "required": true
+        },
+        "message": {
+          "type": "string",
+          "required": true
+        },
+        "unlockDate": {
+          "type": "string",
+          "optional": true
+        },
+        "ctaText": {
+          "type": "string",
+          "optional": true
+        },
+        "ctaHref": {
+          "type": "string",
+          "optional": true
+        }
+      },
+      "variants": {
+        "premium": "bg-amber-50 border-amber-200 text-amber-800",
+        "institutional": "bg-blue-50 border-blue-200 text-blue-800",
+        "embargo": "bg-slate-50 border-slate-200 text-slate-800"
+      },
+      "baseClasses": "p-4 border rounded-lg",
+      "accessibility": "Clear messaging with ARIA labels, keyboard accessible CTAs"
+    },
+    "PremiumServiceCTA": {
+      "purpose": "Promote premium features with academic-appropriate messaging",
+      "props": {
+        "title": {
+          "type": "string",
+          "required": true
+        },
+        "description": {
+          "type": "string",
+          "required": true
+        },
+        "features": {
+          "type": "array",
+          "items": "string",
+          "required": true
+        },
+        "ctaText": {
+          "type": "string",
+          "required": true
+        },
+        "ctaHref": {
+          "type": "string",
+          "required": true
+        },
+        "variant": {
+          "type": "string",
+          "options": [
+            "subtle",
+            "prominent"
+          ],
+          "default": "subtle"
+        }
+      },
+      "variants": {
+        "subtle": "bg-slate-50 border border-slate-200",
+        "prominent": "bg-slate-800 text-white"
+      },
+      "baseClasses": "rounded-lg p-6",
+      "accessibility": "Clear value proposition with accessible feature lists"
+    }
+  },
+  "theme": {
+    "colors": {
+      "slate": {
+        "50": "#f8fafc",
+        "100": "#f1f5f9",
+        "200": "#e2e8f0",
+        "300": "#cbd5e1",
+        "400": "#94a3b8",
+        "500": "#64748b",
+        "600": "#475569",
+        "700": "#334155",
+        "800": "#1e293b",
+        "900": "#0f172a"
+      },
+      "blue": {
+        "50": "#eff6ff",
+        "100": "#dbeafe",
+        "200": "#bfdbfe",
+        "500": "#3b82f6",
+        "800": "#1e40af",
+        "900": "#1e3a8a"
+      },
+      "green": {
+        "50": "#f0fdf4",
+        "100": "#dcfce7",
+        "800": "#166534"
+      },
+      "yellow": {
+        "50": "#fefce8",
+        "100": "#fef3c7",
+        "800": "#92400e"
+      },
+      "red": {
+        "50": "#fef2f2",
+        "100": "#fee2e2",
+        "200": "#fecaca",
+        "300": "#fca5a5",
+        "500": "#ef4444",
+        "800": "#991b1b"
+      },
+      "amber": {
+        "50": "#fffbeb",
+        "200": "#fde68a",
+        "800": "#92400e"
+      }
+    },
+    "spacing": {
+      "xs": "0.25rem",
+      "sm": "0.5rem",
+      "md": "1rem",
+      "lg": "1.5rem",
+      "xl": "2rem",
+      "2xl": "2.5rem",
+      "3xl": "3rem"
+    },
+    "typography": {
+      "fontFamily": {
+        "sans": "Inter, system-ui, -apple-system, sans-serif",
+        "serif": "Georgia, Cambria, serif",
+        "mono": "ui-monospace, SFMono-Regular, Consolas, monospace"
+      },
+      "fontSize": {
+        "xs": "0.75rem",
+        "sm": "0.875rem",
+        "base": "1rem",
+        "lg": "1.125rem",
+        "xl": "1.25rem",
+        "2xl": "1.5rem",
+        "3xl": "1.875rem",
+        "4xl": "2.25rem"
+      },
+      "lineHeight": {
+        "tight": "1.25",
+        "normal": "1.5",
+        "relaxed": "1.75"
+      }
+    }
+  }
+}

@@ -1,0 +1,229 @@
+{
+  "overview": "TalkOnPaper is an academic video platform that enables scholars to transcend geographical, visa, and language barriers by creating spoken explanations of published academic papers. The platform prioritizes academic legitimacy, accessibility, and long-term archival value, serving as a permanent, citable repository for paper-based academic discourse. Every piece of content is strictly tied to published research, ensuring scholarly rigor while democratizing access to academic knowledge through video explanations and automated English dubbing services.",
+  "objectives": [
+    "Break down structural barriers preventing Global South scholars from achieving global academic visibility",
+    "Create a permanent, citable archive of academic paper explanations with DOI-level credibility",
+    "Provide cost-effective alternative to physical conference attendance through digital academic discourse",
+    "Establish sustainable revenue model through premium English auto-dubbing services for international scholars",
+    "Build SEO-optimized, evergreen academic content discoverable through search engines for decades",
+    "Maintain strict academic legitimacy by requiring all content to be based on published papers"
+  ],
+  "user_stories": [
+    {
+      "as": "Global South academic",
+      "want": "to upload a video explaining my published paper",
+      "so": "I can gain international visibility without visa or travel constraints"
+    },
+    {
+      "as": "non-English speaking scholar",
+      "want": "to auto-dub my Talk into English",
+      "so": "I can reach broader international academic audiences"
+    },
+    {
+      "as": "graduate student",
+      "want": "to search and discover paper explanations by topic",
+      "so": "I can better understand complex research in my field"
+    },
+    {
+      "as": "researcher",
+      "want": "to cite a Talk with permanent DOI-linked reference",
+      "so": "I can reference it in my academic publications"
+    },
+    {
+      "as": "institutional librarian",
+      "want": "to access archived Talks years after publication",
+      "so": "I can provide long-term research resources to faculty"
+    },
+    {
+      "as": "paper author",
+      "want": "to verify my publication before creating a Talk",
+      "so": "I can ensure platform maintains academic legitimacy"
+    },
+    {
+      "as": "conference organizer",
+      "want": "to embed TalkOnPaper videos in virtual events",
+      "so": "I can include scholars who cannot travel physically"
+    }
+  ],
+  "functional_requirements": [
+    {
+      "id": "FR-1",
+      "description": "Paper verification system requiring DOI, journal reference, or archive link before Talk creation",
+      "priority": "high"
+    },
+    {
+      "id": "FR-2",
+      "description": "Video upload and hosting system with global CDN distribution via Cloudflare R2",
+      "priority": "high"
+    },
+    {
+      "id": "FR-3",
+      "description": "Automated English dubbing service for premium subscribers using AI voice synthesis",
+      "priority": "high"
+    },
+    {
+      "id": "FR-4",
+      "description": "Permanent Talk page generation with citable URLs linked to original publications",
+      "priority": "high"
+    },
+    {
+      "id": "FR-5",
+      "description": "Search and discovery system optimized for academic topics, authors, and institutions",
+      "priority": "medium"
+    },
+    {
+      "id": "FR-6",
+      "description": "Speaker profile management with academic credentials and publication history",
+      "priority": "medium"
+    },
+    {
+      "id": "FR-7",
+      "description": "Premium subscription management system for auto-dubbing and enhanced hosting services",
+      "priority": "medium"
+    },
+    {
+      "id": "FR-8",
+      "description": "Long-term archival system ensuring content availability for decades with backup redundancy",
+      "priority": "high"
+    },
+    {
+      "id": "FR-9",
+      "description": "SEO optimization engine for academic content discoverability through search engines",
+      "priority": "medium"
+    },
+    {
+      "id": "FR-10",
+      "description": "Editorial workflow system for content moderation and academic quality assurance",
+      "priority": "low"
+    }
+  ],
+  "technical_requirements": [
+    {
+      "category": "Backend",
+      "requirements": [
+        "Flask web framework",
+        "SQLAlchemy ORM",
+        "SQLite in WAL mode",
+        "Python 3.9+"
+      ]
+    },
+    {
+      "category": "Storage",
+      "requirements": [
+        "Cloudflare R2 for media files",
+        "Global CDN distribution",
+        "Automated backup systems"
+      ]
+    },
+    {
+      "category": "Frontend",
+      "requirements": [
+        "Responsive web design",
+        "Video player with subtitle support",
+        "Academic citation formatting"
+      ]
+    },
+    {
+      "category": "AI Services",
+      "requirements": [
+        "Voice synthesis API integration",
+        "Multi-language audio processing",
+        "Quality assurance for dubbed content"
+      ]
+    },
+    {
+      "category": "Infrastructure",
+      "requirements": [
+        "Low-concurrency architecture",
+        "Academic paper API integration",
+        "DOI resolution services"
+      ]
+    }
+  ],
+  "acceptance_criteria": [
+    "All Talks must be linked to verifiable published academic papers with DOI or archive reference",
+    "Premium auto-dubbing service achieves 95% accuracy rate for English translation",
+    "Talk pages remain accessible and citable for minimum 10 years with permanent URLs",
+    "Search system returns relevant academic content within 2 seconds for 90% of queries",
+    "Platform supports scholars from at least 50 countries with multi-language interface",
+    "Video content loads within 5 seconds globally through CDN distribution",
+    "Editorial workflow processes new submissions within 48 hours",
+    "Premium subscription conversion rate exceeds 8% among active Talk creators"
+  ],
+  "timeline": {
+    "phase1": {
+      "name": "Core Platform MVP",
+      "duration": "8 weeks",
+      "deliverables": [
+        "Paper verification system",
+        "Video upload and hosting",
+        "Basic Talk page generation",
+        "Speaker profiles"
+      ]
+    },
+    "phase2": {
+      "name": "Premium Services Launch",
+      "duration": "6 weeks",
+      "deliverables": [
+        "Auto-dubbing integration",
+        "Subscription management",
+        "Enhanced search functionality"
+      ]
+    },
+    "phase3": {
+      "name": "Academic Integration",
+      "duration": "4 weeks",
+      "deliverables": [
+        "Citation system",
+        "DOI integration",
+        "Institutional partnerships",
+        "Advanced archival features"
+      ]
+    }
+  },
+  "risks": [
+    {
+      "risk": "Academic legitimacy questioned due to content quality",
+      "mitigation": "Implement strict paper verification and editorial oversight",
+      "severity": "high"
+    },
+    {
+      "risk": "Auto-dubbing technology produces poor quality translations",
+      "mitigation": "Partner with established AI providers and implement quality controls",
+      "severity": "medium"
+    },
+    {
+      "risk": "Low adoption among target Global South academics",
+      "mitigation": "Direct outreach to academic institutions and conference partnerships",
+      "severity": "high"
+    },
+    {
+      "risk": "Copyright issues with published paper content",
+      "mitigation": "Legal framework ensuring fair use and author permissions",
+      "severity": "medium"
+    },
+    {
+      "risk": "Technical infrastructure cannot handle global video distribution",
+      "mitigation": "Leverage Cloudflare R2 and implement progressive scaling",
+      "severity": "low"
+    }
+  ],
+  "non_goals": [
+    "General educational content not based on published academic papers",
+    "Social media features like comments, likes, or viral content promotion",
+    "Live streaming or real-time interaction capabilities",
+    "Monetization through advertising or non-academic revenue streams",
+    "Content moderation for political or controversial topics unrelated to academic discourse",
+    "Integration with general video platforms like YouTube or TikTok",
+    "Gamification or entertainment-focused engagement features"
+  ],
+  "success_metrics": [
+    "Academic impact: Number of Talks cited in subsequent scholarly publications",
+    "Global reach: Geographic diversity of speakers and viewers across continents",
+    "Premium conversion: Percentage of scholars upgrading to auto-dubbing services",
+    "Long-term value: Average lifespan and continued access of archived Talks",
+    "Academic legitimacy: Rate of content acceptance by institutional libraries",
+    "Barrier reduction: Documented cases of increased visibility for underrepresented scholars",
+    "Research amplification: Papers gaining increased citations after Talk publication"
+  ]
+}

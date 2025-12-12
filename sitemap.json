@@ -1,0 +1,189 @@
+{
+  "name": "TalkOnPaper",
+  "rootPath": "/",
+  "pages": [
+    {
+      "path": "/",
+      "name": "Homepage",
+      "description": "Mission-driven editorial homepage showcasing featured talks and platform value",
+      "layout": "default",
+      "components": [
+        "Header",
+        "HeroSection",
+        "FeaturedTalks",
+        "MissionStatement",
+        "Footer"
+      ],
+      "children": []
+    },
+    {
+      "path": "/talks",
+      "name": "Talks Archive",
+      "description": "Browse and search all video explanations of academic papers",
+      "layout": "archive",
+      "components": [
+        "Header",
+        "SearchFilters",
+        "TalkGrid",
+        "Pagination",
+        "Footer"
+      ],
+      "children": [
+        {
+          "path": "/talks/[slug]",
+          "name": "Individual Talk",
+          "description": "Video explanation with transcript, related papers, and speaker info",
+          "layout": "talk",
+          "components": [
+            "Header",
+            "VideoPlayer",
+            "TalkMetadata",
+            "Transcript",
+            "RelatedContent",
+            "Footer"
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "path": "/papers",
+      "name": "Papers Archive",
+      "description": "Metadata-focused pages for academic papers with links to their talks",
+      "layout": "archive",
+      "components": [
+        "Header",
+        "SearchFilters",
+        "PaperGrid",
+        "Pagination",
+        "Footer"
+      ],
+      "children": [
+        {
+          "path": "/papers/[id]",
+          "name": "Paper Page",
+          "description": "Academic paper metadata, abstract, citations, and link to associated talk",
+          "layout": "paper",
+          "components": [
+            "Header",
+            "PaperMetadata",
+            "Abstract",
+            "Citations",
+            "TalkLink",
+            "Footer"
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "path": "/speakers",
+      "name": "Speakers Directory",
+      "description": "Browse academic speakers and their contributed talks",
+      "layout": "directory",
+      "components": [
+        "Header",
+        "SpeakerGrid",
+        "SearchFilters",
+        "Footer"
+      ],
+      "children": [
+        {
+          "path": "/speakers/[username]",
+          "name": "Speaker Profile",
+          "description": "Individual academic profile with bio, talks, and research interests",
+          "layout": "profile",
+          "components": [
+            "Header",
+            "SpeakerBio",
+            "TalksList",
+            "ResearchInterests",
+            "Footer"
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "path": "/topics",
+      "name": "Academic Topics",
+      "description": "Browse talks and papers by academic field and research area",
+      "layout": "taxonomy",
+      "components": [
+        "Header",
+        "TopicHierarchy",
+        "TopicGrid",
+        "Footer"
+      ],
+      "children": [
+        {
+          "path": "/topics/[category]",
+          "name": "Topic Category",
+          "description": "Talks and papers within a specific academic field or research area",
+          "layout": "topic",
+          "components": [
+            "Header",
+            "TopicHeader",
+            "ContentGrid",
+            "SubTopics",
+            "Footer"
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "path": "/about",
+      "name": "About & Mission",
+      "description": "Platform mission, team information, and academic impact",
+      "layout": "content",
+      "components": [
+        "Header",
+        "MissionStatement",
+        "TeamBios",
+        "ImpactMetrics",
+        "Footer"
+      ],
+      "children": []
+    },
+    {
+      "path": "/premium",
+      "name": "Premium Services",
+      "description": "Advanced features and services for academic researchers and institutions",
+      "layout": "product",
+      "components": [
+        "Header",
+        "ServiceTiers",
+        "FeatureComparison",
+        "Testimonials",
+        "PricingCTA",
+        "Footer"
+      ],
+      "children": []
+    },
+    {
+      "path": "/privacy",
+      "name": "Privacy Policy",
+      "description": "Data collection, usage, and privacy protection policies",
+      "layout": "legal",
+      "components": [
+        "Header",
+        "LegalContent",
+        "Footer"
+      ],
+      "children": []
+    },
+    {
+      "path": "/terms",
+      "name": "Terms of Service",
+      "description": "Platform usage terms, user responsibilities, and service agreements",
+      "layout": "legal",
+      "components": [
+        "Header",
+        "LegalContent",
+        "Footer"
+      ],
+      "children": []
+    }
+  ]
+}

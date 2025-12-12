@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <p class="eyebrow">Speakers</p>
+        <h2>Researchers presenting their own published work</h2>
+      </div>
+    </div>
+
+    <div class="grid">
+      {% for speaker in speakers %}
+        <article class="card">
+          <h3><a href="{{ url_for('main.speaker_profile', speaker_id=speaker.id) }}">{{ speaker.full_name }}</a></h3>
+          <p class="meta">{{ speaker.affiliation }}</p>
+          <p class="muted">{{ speaker.bio_short or "Academic profile forthcoming." }}</p>
+          {% if speaker.country %}<div class="chip">{{ speaker.country }}</div>{% endif %}
+          <div class="chip">{{ speaker.talks|length }} Talk(s)</div>
+        </article>
+      {% else %}
+        <p class="muted">No speakers yet. Invite published authors to record.</p>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

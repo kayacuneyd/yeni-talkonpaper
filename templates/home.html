@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="container">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Global South first</p>
+        <h1>Published papers, translated into clear video explanations.</h1>
+        <p>TalkOnPaper removes visa, language, and geography barriers so scholars can share research as English-dubbed videos, hosted with CDN performance and citation-ready pages.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="{{ url_for('main.talks_archive') }}">Browse Talks</a>
+          <a class="btn ghost" href="{{ url_for('main.premium') }}">See Premium dubbing</a>
+        </div>
+      </div>
+      <div class="surface">
+        <p class="eyebrow">Platform checklist</p>
+        <ul class="list">
+          <li><span class="badge">Verified papers</span> DOI/URL required before publishing a Talk</li>
+          <li><span class="badge premium">English dubbing</span> AI-assisted voice with human review option</li>
+          <li><span class="badge">SEO-first</span> Structured data for Article, VideoObject, Person</li>
+          <li><span class="badge">Archive</span> SQLite + Cloudflare R2, designed for decades</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="section-header">
+      <h2>Featured Talks</h2>
+      <a href="{{ url_for('main.talks_archive') }}">View archive →</a>
+    </div>
+    <div class="grid">
+      {% for talk in featured_talks %}
+        <article class="card">
+          <div class="pill-text">{{ talk.access_level|capitalize }} access</div>
+          <h3><a href="{{ url_for('main.talk_detail', talk_id=talk.id, slug=talk.slug) }}">{{ talk.title }}</a></h3>
+          <p class="meta">{{ talk.speaker.full_name }} · {{ talk.speaker.affiliation }}</p>
+          <p class="muted">{{ talk.summary or "English-dubbed explanation of a published paper." }}</p>
+          <div class="chip">{{ talk.duration_minutes }} min</div>
+          {% if talk.is_dubbed %}<div class="chip">Dubbed</div>{% endif %}
+        </article>
+      {% else %}
+        <p class="muted">No talks yet. Add your first paper to seed the archive.</p>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
