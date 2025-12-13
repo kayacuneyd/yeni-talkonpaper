@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% set title = "Register" %}
+{% block content %}
+  <div class="container mx-auto px-4 max-w-[500px]">
+    <div class="card bg-base-100 border border-base-300 shadow-card rounded-2xl p-8">
+      <div class="text-center mb-6">
+        <h1 class="text-3xl font-extrabold mb-2">Create Account</h1>
+        <p class="text-base-content/70">Join TalkOnPaper to access registered content</p>
+      </div>
+
+      <form method="POST" action="{{ url_for('auth.register') }}">
+        <div class="form-control mb-4">
+          <label class="label">
+            <span class="label-text font-bold">Email</span>
+          </label>
+          <input
+            type="email"
+            name="email"
+            placeholder="your.email@example.com"
+            class="input input-bordered w-full"
+            required
+            autocomplete="email"
+          />
+        </div>
+
+        <div class="form-control mb-4">
+          <label class="label">
+            <span class="label-text font-bold">Password</span>
+          </label>
+          <input
+            type="password"
+            name="password"
+            placeholder="At least 6 characters"
+            class="input input-bordered w-full"
+            required
+            autocomplete="new-password"
+            minlength="6"
+          />
+        </div>
+
+        <div class="form-control mb-6">
+          <label class="label">
+            <span class="label-text font-bold">Confirm Password</span>
+          </label>
+          <input
+            type="password"
+            name="password_confirm"
+            placeholder="Re-enter password"
+            class="input input-bordered w-full"
+            required
+            autocomplete="new-password"
+            minlength="6"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary w-full shadow-button normal-case font-extrabold mb-4">
+          Create Account
+        </button>
+
+        <div class="text-center text-sm text-base-content/70">
+          Already have an account?
+          <a href="{{ url_for('auth.login') }}" class="link link-primary font-bold">Log in</a>
+        </div>
+      </form>
+
+      <div class="divider my-6">Account Features</div>
+
+      <div class="space-y-2 text-sm">
+        <div class="flex items-start gap-2">
+          <span class="text-success font-bold">✓</span>
+          <span>Access to registered talks and papers</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="text-success font-bold">✓</span>
+          <span>Full video playback and transcripts</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="text-success font-bold">✓</span>
+          <span>Citation-friendly links</span>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="text-primary font-bold">→</span>
+          <span>Upgrade to Premium for dubbing services</span>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

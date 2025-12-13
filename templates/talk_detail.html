@@ -7,18 +7,63 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-4.5 items-start">
       <div class="flex flex-col gap-3">
-        {% if video_url %}
+        {% if has_access and video_url %}
+        <!-- Full Video Access -->
         <div class="rounded-2xl overflow-hidden border border-base-300 bg-neutral shadow-lg">
-          <video controls poster="{{ talk.thumbnail_object_key or '' }}" class="w-full">
+          <video controls poster="{{ talk.thumbnail_object_key or '/static/fallback-talk.jpg' }}" class="w-full">
             <source src="{{ video_url }}" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
-        {% elif preview_url %}
-        <div class="alert bg-orange-50 text-orange-800 border border-dashed border-orange-300">
-          <span>Preview available. Sign in for full access.</span>
+        {% elif not has_access %}
+        <!-- Access Denied - Show Upgrade Prompt -->
+        <div class="rounded-2xl overflow-hidden border border-base-300 bg-neutral/10 shadow-lg p-8 text-center">
+          <div class="mb-4">
+            <svg class="w-16 h-16 mx-auto text-base-content/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-extrabold mb-2">
+            {% if talk.access_level == "registered" %}
+              Sign In Required
+            {% else %}
+              Premium Content
+            {% endif %}
+          </h3>
+          <p class="text-base-content/70 mb-4">
+            {% if talk.access_level == "registered" %}
+              Create a free account to watch this talk
+            {% elif talk.access_level == "academic_premium" %}
+              Upgrade to Academic Premium to access this content
+            {% endif %}
+          </p>
+          <div class="flex justify-center gap-3">
+            {% if not current_user.is_authenticated %}
+              <a href="{{ url_for('auth.register') }}" class="btn btn-primary shadow-button normal-case font-extrabold">
+                Sign Up Free
+              </a>
+              <a href="{{ url_for('auth.login') }}" class="btn btn-outline normal-case">
+                Log In
+              </a>
+            {% else %}
+              <a href="{{ url_for('auth.account') }}" class="btn btn-primary shadow-button normal-case font-extrabold">
+                Upgrade Now
+              </a>
+            {% endif %}
+          </div>
         </div>
+        {% if preview_url %}
+        <!-- Preview Video -->
+        <div class="rounded-2xl overflow-hidden border border-base-300 bg-neutral shadow-sm">
+          <video controls poster="{{ talk.thumbnail_object_key or '/static/fallback-talk.jpg' }}" class="w-full">
+            <source src="{{ preview_url }}" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <p class="text-sm text-base-content/60 text-center">Preview only - Sign in for full access</p>
+        {% endif %}
         {% else %}
+        <!-- No Video Available -->
         <div class="alert bg-orange-50 text-orange-800 border border-dashed border-orange-300">
           <span>Video is processing or awaiting upload.</span>
         </div>
@@ -67,13 +112,26 @@
 
         <div class="card bg-base-100 border border-base-300 shadow-sm rounded-2xl p-4">
           <p class="text-xs uppercase tracking-widest font-extrabold text-success mb-3">Access</p>
-          <p class="text-base-content/60 mb-3">Access level: {{ talk.access_level|capitalize }}{% if talk.is_dubbed %} · English dubbed{% endif %}</p>
+          <div class="mb-3">
+            {% if talk.access_level == "public" %}
+              <span class="badge bg-success/10 text-success border-success/20">Public Access</span>
+            {% elif talk.access_level == "registered" %}
+              <span class="badge bg-primary/10 text-primary border-primary/20">Registered Access</span>
+            {% elif talk.access_level == "academic_premium" %}
+              <span class="badge bg-orange-50 text-orange-800 border-orange-200">Premium Access</span>
+            {% endif %}
+            {% if talk.is_dubbed %}
+              <span class="badge badge-ghost ml-1">English Dubbed</span>
+            {% endif %}
+          </div>
           {% if audio_url %}
           <audio controls class="w-full mb-3">
             <source src="{{ audio_url }}" type="audio/mpeg" />
           </audio>
           {% endif %}
-          <a class="btn btn-primary shadow-button normal-case font-extrabold hover:-translate-y-px transition-all" href="{{ url_for('main.premium') }}">Upgrade for dubbing</a>
+          {% if talk.access_level != "academic_premium" or not current_user.is_authenticated or current_user.subscription_level != "academic_premium" %}
+            <a class="btn btn-primary shadow-button normal-case font-extrabold hover:-translate-y-px transition-all" href="{{ url_for('main.premium') }}">Learn About Premium</a>
+          {% endif %}
         </div>
       </div>
     </div>

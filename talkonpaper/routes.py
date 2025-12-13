@@ -1,12 +1,13 @@
 from __future__ import annotations
 
 from datetime import date
-from typing import List, Optional
+from typing import List, Optional, Tuple
 
 from flask import Blueprint, current_app, render_template, request
+from flask_login import current_user
 
 from .extensions import db
-from .models import Paper, Speaker, Talk
+from .models import Paper, Speaker, Talk, User
 from .storage import signed_url
 
 main_bp = Blueprint("main", __name__)
@@ -17,6 +18,29 @@ _seeded = False
 def canonical_path(path: str) -> str:
     host = current_app.config.get("DEFAULT_CANONICAL_HOST", "").rstrip("/")
     return f"{host}{path}"
+
+
+def can_access_talk(talk: Talk, user: Optional[User] = None) -> Tuple[bool, str]:
+    """
+    Check if a user can access a talk based on their subscription level.
+    Returns (has_access, access_type) where access_type is 'full' or 'preview'.
+    """
+    access_requirements = {
+        "public": ["public", "registered", "academic_premium"],
+        "registered": ["registered", "academic_premium"],
+        "academic_premium": ["academic_premium"],
+    }
+
+    # Determine user's subscription level
+    if user and hasattr(user, "is_authenticated") and user.is_authenticated:
+        user_level = user.subscription_level
+    else:
+        user_level = "public"
+
+    required_levels = access_requirements.get(talk.access_level, ["academic_premium"])
+    has_access = user_level in required_levels
+
+    return has_access, "full" if has_access else "preview"
 
 
 def _seed_sample_data() -> None:
@@ -227,6 +251,134 @@ def _seed_sample_data() -> None:
                 "transcript_text": "Reef monitoring pipeline...",
             },
         },
+        {
+            "speaker": {
+                "full_name": "Prof. Elena Kovač",
+                "affiliation": "University of Zagreb",
+                "country": "Croatia",
+                "bio_short": "Climate modeling and policy impact assessment.",
+                "website_or_profile": "https://example.org/elena-kovac",
+            },
+            "paper": {
+                "title": "Climate Models and European Policy Implications",
+                "abstract": "Analysis of climate projection uncertainty and policy decisions.",
+                "authors": "Elena Kovač, Martin Schneider",
+                "doi_or_url": "10.3456/climate-policy.2024",
+                "journal_or_publisher": "Environmental Science & Policy",
+                "publication_year": 2024,
+                "language_original": "en",
+                "keywords": "climate,policy,europe",
+            },
+            "talk": {
+                "title": "Climate Models and Policy Implications",
+                "summary": "Understanding projection uncertainty in climate policy.",
+                "duration_seconds": 820,
+                "talk_date": date(2024, 10, 15),
+                "access_level": "public",
+                "is_dubbed": True,
+                "video_object_key": sample_media,
+                "preview_video_key": sample_media,
+                "audio_object_key": sample_media,
+                "thumbnail_object_key": "https://images.pexels.com/photos/1181695/pexels-photo-1181695.jpeg?auto=compress&cs=tinysrgb&w=1200",
+                "transcript_text": "Climate policy requires robust models...",
+            },
+        },
+        {
+            "speaker": {
+                "full_name": "Dr. Rajesh Kumar",
+                "affiliation": "All India Institute of Medical Sciences",
+                "country": "India",
+                "bio_short": "mRNA vaccine development and immunology.",
+                "website_or_profile": "https://example.org/rajesh-kumar",
+            },
+            "paper": {
+                "title": "mRNA Vaccine Development: From Lab to Clinic",
+                "abstract": "Comprehensive review of mRNA vaccine technology and clinical trials.",
+                "authors": "Rajesh Kumar, Sarah Chen, Ahmed Hassan",
+                "doi_or_url": "10.5567/mrna-vaccines.2024",
+                "journal_or_publisher": "Nature Medicine",
+                "publication_year": 2024,
+                "language_original": "en",
+                "keywords": "vaccines,mrna,immunology",
+            },
+            "talk": {
+                "title": "mRNA Vaccine Development: From Lab to Clinic",
+                "summary": "The science behind mRNA vaccines and their rapid deployment.",
+                "duration_seconds": 950,
+                "talk_date": date(2024, 8, 20),
+                "access_level": "registered",
+                "is_dubbed": True,
+                "video_object_key": sample_media,
+                "preview_video_key": sample_media,
+                "audio_object_key": sample_media,
+                "thumbnail_object_key": "https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg?auto=compress&cs=tinysrgb&w=1200",
+                "transcript_text": "mRNA technology represents a paradigm shift...",
+            },
+        },
+        {
+            "speaker": {
+                "full_name": "Dr. Yuki Tanaka",
+                "affiliation": "Tokyo Institute of Technology",
+                "country": "Japan",
+                "bio_short": "Neural architecture search and low-resource NLP.",
+                "website_or_profile": "https://example.org/yuki-tanaka",
+            },
+            "paper": {
+                "title": "Neural Architecture Search for Low-Resource Languages",
+                "abstract": "Automated model design for under-resourced language processing.",
+                "authors": "Yuki Tanaka, Maria Gonzalez",
+                "doi_or_url": "10.7788/nas-lowres.2025",
+                "journal_or_publisher": "Computational Linguistics",
+                "publication_year": 2025,
+                "language_original": "ja",
+                "keywords": "nlp,neural-architecture,low-resource",
+            },
+            "talk": {
+                "title": "Neural Architecture Search for Low-Resource Languages",
+                "summary": "Democratizing NLP for languages with limited training data.",
+                "duration_seconds": 880,
+                "talk_date": date(2025, 1, 10),
+                "access_level": "academic_premium",
+                "is_dubbed": True,
+                "video_object_key": sample_media,
+                "preview_video_key": sample_media,
+                "audio_object_key": sample_media,
+                "thumbnail_object_key": "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=1200",
+                "transcript_text": "Neural architecture search enables efficient model discovery...",
+            },
+        },
+        {
+            "speaker": {
+                "full_name": "Prof. Kwame Mensah",
+                "affiliation": "University of Ghana",
+                "country": "Ghana",
+                "bio_short": "Digital pedagogy and post-pandemic education.",
+                "website_or_profile": "https://example.org/kwame-mensah",
+            },
+            "paper": {
+                "title": "Digital Pedagogy in Post-Pandemic Academia",
+                "abstract": "Lessons learned from emergency remote teaching and hybrid models.",
+                "authors": "Kwame Mensah, Lisa Anderson",
+                "doi_or_url": "10.6789/digital-pedagogy.2024",
+                "journal_or_publisher": "Higher Education Research",
+                "publication_year": 2024,
+                "language_original": "en",
+                "keywords": "education,pedagogy,digital",
+            },
+            "talk": {
+                "title": "Digital Pedagogy in Post-Pandemic Academia",
+                "summary": "Effective strategies for hybrid and online teaching.",
+                "duration_seconds": 750,
+                "talk_date": date(2024, 6, 5),
+                "access_level": "public",
+                "is_dubbed": True,
+                "video_object_key": sample_media,
+                "preview_video_key": sample_media,
+                "audio_object_key": sample_media,
+                "thumbnail_object_key": "https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&cs=tinysrgb&w=1200",
+                "transcript_text": "Post-pandemic education requires new pedagogical approaches...",
+            },
+        },
     ]
 
     for item in samples:
@@ -275,15 +427,23 @@ def talks_archive():
 @main_bp.route("/talks/<int:talk_id>", defaults={"slug": None})
 def talk_detail(talk_id: int, slug: Optional[str]):
     talk = Talk.query.filter_by(id=talk_id).first_or_404()
-    video_url = signed_url(talk.video_object_key)
+
+    # Check access control
+    has_access, access_type = can_access_talk(talk, current_user)
+
+    # Only provide full video URL if user has access
+    video_url = signed_url(talk.video_object_key) if has_access else None
     preview_url = signed_url(talk.preview_video_key) if talk.preview_video_key else None
-    audio_url = signed_url(talk.audio_object_key) if talk.audio_object_key else None
+    audio_url = signed_url(talk.audio_object_key) if (talk.audio_object_key and has_access) else None
+
     return render_template(
         "talk_detail.html",
         talk=talk,
         video_url=video_url,
         preview_url=preview_url,
         audio_url=audio_url,
+        has_access=has_access,
+        access_type=access_type,
         canonical_url=canonical_path(request.path),
     )
 
@@ -337,6 +497,50 @@ def speaker_profile(speaker_id: int):
 def premium():
     return render_template(
         "premium.html",
+        canonical_url=canonical_path(request.path),
+    )
+
+
+@main_bp.route("/about")
+def about():
+    return render_template(
+        "about.html",
+        canonical_url=canonical_path(request.path),
+    )
+
+
+@main_bp.route("/contact", methods=["GET", "POST"])
+def contact():
+    if request.method == "POST":
+        name = request.form.get("name", "").strip()
+        email = request.form.get("email", "").strip()
+        subject = request.form.get("subject", "").strip()
+        message = request.form.get("message", "").strip()
+
+        # Basic validation
+        if not all([name, email, subject, message]):
+            from flask import flash
+            flash("All fields are required.", "error")
+        else:
+            # Log to file for MVP (can integrate email later)
+            import os
+            from datetime import datetime
+
+            log_dir = os.path.join(os.path.dirname(__file__), "..", "contact_submissions")
+            os.makedirs(log_dir, exist_ok=True)
+            log_file = os.path.join(log_dir, f"{datetime.now().strftime('%Y%m%d_%H%M%S')}_{email}.txt")
+
+            with open(log_file, "w") as f:
+                f.write(f"Name: {name}\n")
+                f.write(f"Email: {email}\n")
+                f.write(f"Subject: {subject}\n")
+                f.write(f"Message:\n{message}\n")
+
+            from flask import flash
+            flash("Thank you for your message! We'll respond within 48 hours.", "success")
+
+    return render_template(
+        "contact.html",
         canonical_url=canonical_path(request.path),
     )
 

@@ -102,7 +102,25 @@
             <a href="{{ url_for('main.talks_archive') }}" class="link link-hover text-base-content no-underline">Talks</a>
             <a href="{{ url_for('main.papers_archive') }}" class="link link-hover text-base-content no-underline">Papers</a>
             <a href="{{ url_for('main.speakers_directory') }}" class="link link-hover text-base-content no-underline">Speakers</a>
-            <a href="{{ url_for('admin.dashboard') }}" class="link link-hover text-base-content no-underline">Admin</a>
+            {% if current_user.is_authenticated %}
+              <div class="dropdown dropdown-end">
+                <label tabindex="0" class="btn btn-ghost btn-sm normal-case font-bold">
+                  {{ current_user.email.split('@')[0] }}
+                  {% if current_user.subscription_level == "academic_premium" %}
+                    <span class="badge badge-xs bg-orange-50 text-orange-800 ml-1">Premium</span>
+                  {% elif current_user.subscription_level == "registered" %}
+                    <span class="badge badge-xs bg-primary/10 text-primary ml-1">Registered</span>
+                  {% endif %}
+                </label>
+                <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow-card bg-base-100 rounded-box w-52 mt-1">
+                  <li><a href="{{ url_for('auth.account') }}">Account</a></li>
+                  <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+                </ul>
+              </div>
+            {% else %}
+              <a href="{{ url_for('auth.login') }}" class="link link-hover text-base-content no-underline">Login</a>
+              <a href="{{ url_for('auth.register') }}" class="btn btn-outline btn-sm rounded-full normal-case">Register</a>
+            {% endif %}
             <a href="{{ url_for('main.premium') }}" class="btn btn-primary btn-sm rounded-full shadow-button normal-case">Premium</a>
           </nav>
         </div>
@@ -126,35 +144,44 @@
 
     <footer class="footer bg-neutral text-neutral-content p-10">
       <div class="container mx-auto px-4 max-w-[1180px]">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <!-- Left Column - Credentials -->
           <div>
-            <span class="text-xl font-extrabold">TalkOnPaper</span>
-            <p class="text-neutral-content/70 mt-2">
-              Cross-border academic visibility without visas, language, or
-              geography barriers.
+            <span class="text-xl font-extrabold mb-4 block">TalkOnPaper &copy; 2025</span>
+            <div class="mb-4">
+              <p class="text-xs uppercase tracking-widest font-extrabold text-neutral-content/70 mb-2">Developed by</p>
+              <p class="mb-1">
+                <a href="https://kayacuneyt.com" target="_blank" rel="noopener noreferrer" class="link link-hover text-neutral-content">Cüneyt Kaya</a>
+              </p>
+              <p class="mb-1">
+                <a href="https://digitaltamam.com" target="_blank" rel="noopener noreferrer" class="link link-hover text-neutral-content">digitaltamam.com</a>
+              </p>
+              <p class="text-neutral-content/70">Kornwestheim, Germany</p>
+            </div>
+            <div class="text-neutral-content/60 text-sm">
+              <p>Technology: Flask · Cloudflare R2 · Tailwind CSS</p>
+              <p class="mt-1">SEO-first · Archive-ready</p>
+            </div>
+          </div>
+
+          <!-- Right Column - Platform Details -->
+          <div>
+            <span class="text-xs uppercase tracking-widest font-extrabold mb-3 block">About the Platform</span>
+            <p class="text-neutral-content/70 mb-4">
+              Cross-border academic visibility without visas, language, or geography barriers.
             </p>
+            <div class="grid grid-cols-2 gap-x-6 gap-y-2">
+              <a href="{{ url_for('main.talks_archive') }}" class="link link-hover block">Talks Archive</a>
+              <a href="{{ url_for('main.premium') }}" class="link link-hover block">Premium Services</a>
+              <a href="{{ url_for('main.papers_archive') }}" class="link link-hover block">Paper Index</a>
+              <a href="{{ url_for('main.about') }}" class="link link-hover block">About</a>
+              <a href="{{ url_for('main.speakers_directory') }}" class="link link-hover block">Speakers</a>
+              <a href="{{ url_for('main.contact') }}" class="link link-hover block">Contact</a>
+              <a href="{{ url_for('blog.index') }}" class="link link-hover block">Blog</a>
+              <a href="#" class="link link-hover block">Privacy</a>
+              <a href="#" class="link link-hover block">Terms</a>
+            </div>
           </div>
-          <div>
-            <span class="text-xs uppercase tracking-widest font-extrabold mb-2 block">Explore</span>
-            <a href="{{ url_for('main.talks_archive') }}" class="link link-hover block mb-1">Talks archive</a>
-            <a href="{{ url_for('main.papers_archive') }}" class="link link-hover block mb-1">Paper index</a>
-            <a href="{{ url_for('main.speakers_directory') }}" class="link link-hover block">Speakers</a>
-          </div>
-          <div>
-            <span class="text-xs uppercase tracking-widest font-extrabold mb-2 block">Platform</span>
-            <a href="{{ url_for('main.premium') }}" class="link link-hover block mb-1">Premium services</a>
-            <a href="#" class="link link-hover block mb-1">Privacy</a>
-            <a href="#" class="link link-hover block">Terms</a>
-          </div>
-        </div>
-        <div class="border-t border-neutral-content/20 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-neutral-content/70">
-          <span>SEO-first · Archive-ready</span>
-          <span>
-            Developed by
-            <a href="https://kayacuneyt.com" target="_blank" rel="noopener noreferrer" class="link link-hover text-neutral-content">Cüneyt Kaya</a>
-            <a href="https://digitaltamam.com" target="_blank" rel="noopener noreferrer" class="link link-hover text-neutral-content">& digitaltamam.com</a>
-            in Kornwestheim &copy; {{ 2025 }}
-          </span>
         </div>
       </div>
     </footer>

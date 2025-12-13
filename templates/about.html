@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+{% set title = "About" %}
+{% block content %}
+  <div class="container mx-auto px-4 max-w-[1180px]">
+    <!-- Hero Section -->
+    <div class="text-center mb-12">
+      <p class="text-xs uppercase tracking-widest font-extrabold text-success mb-3">About TalkOnPaper</p>
+      <h1 class="text-5xl font-extrabold mb-4">Cross-Border Academic Visibility</h1>
+      <p class="text-xl text-base-content/70 max-w-3xl mx-auto">
+        Breaking down language, geography, and visa barriers to amplify research voices worldwide.
+      </p>
+    </div>
+
+    <!-- Mission Section -->
+    <div class="card bg-base-100 border border-base-300 shadow-card rounded-2xl p-8 mb-8">
+      <h2 class="text-3xl font-extrabold mb-4">Our Mission</h2>
+      <p class="text-lg text-base-content/80 leading-relaxed mb-4">
+        TalkOnPaper democratizes academic visibility by enabling researchers from any country to present their published work in English without physical travel, visa requirements, or language barriers.
+      </p>
+      <p class="text-lg text-base-content/80 leading-relaxed">
+        Every talk is grounded in a verified DOI or published paper reference, ensuring academic rigor while maximizing discoverability through SEO-optimized video content.
+      </p>
+    </div>
+
+    <!-- How It Works Section -->
+    <div class="mb-12">
+      <h2 class="text-3xl font-extrabold mb-6 text-center">How It Works</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="card bg-base-100 border border-base-300 shadow-sm rounded-2xl p-6 text-center">
+          <div class="text-4xl mb-3">📄</div>
+          <h3 class="text-xl font-bold mb-2">1. Submit Your Paper</h3>
+          <p class="text-base-content/70">
+            Provide your published paper's DOI or reference URL along with talk details.
+          </p>
+        </div>
+        <div class="card bg-base-100 border border-base-300 shadow-sm rounded-2xl p-6 text-center">
+          <div class="text-4xl mb-3">🎤</div>
+          <h3 class="text-xl font-bold mb-2">2. Record or Dub</h3>
+          <p class="text-base-content/70">
+            Present in your language or use our premium dubbing service for English voiceover.
+          </p>
+        </div>
+        <div class="card bg-base-100 border border-base-300 shadow-sm rounded-2xl p-6 text-center">
+          <div class="text-4xl mb-3">🌍</div>
+          <h3 class="text-xl font-bold mb-2">3. Reach Global Audiences</h3>
+          <p class="text-base-content/70">
+            Your talk is indexed, searchable, and accessible to researchers worldwide.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vision Section -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+      <div class="card bg-base-100 border border-base-300 shadow-sm rounded-2xl p-6">
+        <h3 class="text-2xl font-extrabold mb-3">Why TalkOnPaper?</h3>
+        <ul class="space-y-2 text-base-content/80">
+          <li class="flex items-start gap-2">
+            <span class="text-success font-bold">✓</span>
+            <span><strong>DOI-First:</strong> Every talk links to verified published research</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-success font-bold">✓</span>
+            <span><strong>SEO-Optimized:</strong> Designed for maximum discoverability on search engines</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-success font-bold">✓</span>
+            <span><strong>Archive-Ready:</strong> Permanent, citable video references for your work</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-success font-bold">✓</span>
+            <span><strong>Language-Agnostic:</strong> Present in any language, reach English audiences</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-success font-bold">✓</span>
+            <span><strong>No Visas Needed:</strong> Global conferences without travel barriers</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card bg-base-100 border border-base-300 shadow-sm rounded-2xl p-6">
+        <h3 class="text-2xl font-extrabold mb-3">Our Technology</h3>
+        <p class="text-base-content/80 mb-4">
+          TalkOnPaper is built with modern, scalable technologies to ensure reliability and performance:
+        </p>
+        <ul class="space-y-2 text-base-content/80">
+          <li class="flex items-start gap-2">
+            <span class="text-primary font-bold">→</span>
+            <span><strong>Flask:</strong> Lightweight Python web framework</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-primary font-bold">→</span>
+            <span><strong>Cloudflare R2:</strong> Scalable object storage for video content</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-primary font-bold">→</span>
+            <span><strong>Tailwind CSS:</strong> Modern, responsive design system</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-primary font-bold">→</span>
+            <span><strong>SQLAlchemy:</strong> Robust database management</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Team Section -->
+    <div class="card bg-neutral text-neutral-content rounded-2xl p-8 mb-8">
+      <h2 class="text-3xl font-extrabold mb-4 text-center">Our Team</h2>
+      <p class="text-center text-neutral-content/80 mb-6 max-w-2xl mx-auto">
+        TalkOnPaper is developed and maintained by a team committed to democratizing academic knowledge and cross-border collaboration.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+        <div class="text-center">
+          <p class="text-xl font-bold mb-1">
+            <a href="https://kayacuneyt.com" target="_blank" rel="noopener noreferrer" class="link link-hover text-neutral-content">
+              Cüneyt Kaya
+            </a>
+          </p>
+          <p class="text-neutral-content/70">Lead Developer</p>
+        </div>
+        <div class="text-center">
+          <p class="text-xl font-bold mb-1">
+            <a href="https://digitaltamam.com" target="_blank" rel="noopener noreferrer" class="link link-hover text-neutral-content">
+              digitaltamam.com
+            </a>
+          </p>
+          <p class="text-neutral-content/70">Development Partner</p>
+        </div>
+      </div>
+      <p class="text-center text-neutral-content/70 mt-6">Based in Kornwestheim, Germany</p>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="text-center">
+      <h2 class="text-2xl font-extrabold mb-4">Ready to Share Your Research?</h2>
+      <div class="flex justify-center gap-4">
+        <a href="{{ url_for('main.premium') }}" class="btn btn-primary shadow-button normal-case font-extrabold">
+          Explore Premium Services
+        </a>
+        <a href="{{ url_for('main.talks_archive') }}" class="btn btn-outline normal-case font-extrabold">
+          Browse Talks
+        </a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

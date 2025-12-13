@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% set title = "Login" %}
+{% block content %}
+  <div class="container mx-auto px-4 max-w-[500px]">
+    <div class="card bg-base-100 border border-base-300 shadow-card rounded-2xl p-8">
+      <div class="text-center mb-6">
+        <h1 class="text-3xl font-extrabold mb-2">Welcome Back</h1>
+        <p class="text-base-content/70">Log in to access your account</p>
+      </div>
+
+      <form method="POST" action="{{ url_for('auth.login') }}">
+        <div class="form-control mb-4">
+          <label class="label">
+            <span class="label-text font-bold">Email</span>
+          </label>
+          <input
+            type="email"
+            name="email"
+            placeholder="your.email@example.com"
+            class="input input-bordered w-full"
+            required
+            autocomplete="email"
+          />
+        </div>
+
+        <div class="form-control mb-6">
+          <label class="label">
+            <span class="label-text font-bold">Password</span>
+          </label>
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter your password"
+            class="input input-bordered w-full"
+            required
+            autocomplete="current-password"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary w-full shadow-button normal-case font-extrabold mb-4">
+          Log In
+        </button>
+
+        <div class="text-center text-sm text-base-content/70">
+          Don't have an account?
+          <a href="{{ url_for('auth.register') }}" class="link link-primary font-bold">Sign up</a>
+        </div>
+      </form>
+    </div>
+
+    <!-- Info Card -->
+    <div class="card bg-neutral text-neutral-content rounded-2xl p-6 mt-6">
+      <p class="text-sm text-center">
+        <strong>Free Account Benefits:</strong> Access registered talks, view full transcripts, and explore our growing archive of academic videos.
+      </p>
+    </div>
+  </div>
+{% endblock %}

@@ -17,7 +17,13 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4.5">
       {% for talk in talks %}
       <article class="card bg-base-100 shadow-card border border-base-300 p-4.5">
-        <div class="badge badge-info badge-lg font-bold mb-2.5">{{ talk.access_level|capitalize }} access</div>
+        {% if talk.access_level == "public" %}
+          <div class="badge bg-success/10 text-success border-success/20 badge-lg font-bold mb-2.5">Public Access</div>
+        {% elif talk.access_level == "registered" %}
+          <div class="badge bg-primary/10 text-primary border-primary/20 badge-lg font-bold mb-2.5">Registered Access</div>
+        {% elif talk.access_level == "academic_premium" %}
+          <div class="badge bg-orange-50 text-orange-800 border-orange-200 badge-lg font-bold mb-2.5">Premium Access</div>
+        {% endif %}
         <h3 class="text-xl font-bold my-2.5"><a href="{{ url_for('main.talk_detail', talk_id=talk.id, slug=talk.slug) }}" class="link link-primary">{{ talk.title }}</a></h3>
         <p class="text-sm text-base-content/60 mb-2">{{ talk.speaker.full_name }} · {{ talk.speaker.affiliation }}</p>
         <p class="text-base-content/60 mb-2">{{ talk.summary or talk.paper.abstract[:150] ~ "…" }}</p>

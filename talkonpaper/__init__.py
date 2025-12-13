@@ -7,6 +7,8 @@ from .config import Config
 from .extensions import db, login_manager, register_sqlite_pragmas
 from .routes import main_bp
 from .admin import admin_bp
+from .auth import auth_bp
+from .blog import blog_bp
 
 
 def create_app(test_config: dict | None = None) -> Flask:
@@ -42,12 +44,14 @@ def _configure_extensions(app: Flask) -> None:
     db.init_app(app)
     register_sqlite_pragmas(app)
     login_manager.init_app(app)
-    login_manager.login_view = "main.home"
+    login_manager.login_view = "auth.login"
 
 
 def _register_blueprints(app: Flask) -> None:
     app.register_blueprint(main_bp)
     app.register_blueprint(admin_bp)
+    app.register_blueprint(auth_bp)
+    app.register_blueprint(blog_bp)
 
 
 def _register_template_globals(app: Flask) -> None:
