@@ -1,18 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
-  <div class="container" style="max-width:520px;">
-    <div class="surface">
-      <p class="eyebrow">Admin giriş</p>
-      <h1>Yönetim paneline erişim</h1>
-      <p class="muted">Yalnızca ekip içi kullanım. Şifreyi bilmiyorsanız proje sahibine danışın.</p>
-      <form method="post" class="stack" style="margin-top:16px;">
-        <label class="input-label">
-          Şifre
-          <input type="password" name="password" placeholder="Admin password" required />
+  <div class="container mx-auto px-4 max-w-lg">
+    <div class="card bg-base-100 border border-base-300 shadow-lg p-6">
+      <p class="text-xs uppercase tracking-widest font-extrabold text-success mb-2">Admin giriş</p>
+      <h1 class="text-3xl font-extrabold mb-2">Yönetim paneline erişim</h1>
+      <p class="text-base-content/60 mb-5">Yalnızca ekip içi kullanım. Şifreyi bilmiyorsanız proje sahibine danışın.</p>
+      <form method="post" class="flex flex-col gap-4">
+        <label class="form-control">
+          <div class="label">
+            <span class="label-text font-bold">Şifre</span>
+          </div>
+          <input type="password" name="password" placeholder="Admin password" required class="input input-bordered w-full font-semibold" />
         </label>
-        <button type="submit" class="btn primary" style="width:100%;">Giriş yap</button>
+        <button type="submit" class="btn btn-primary w-full normal-case font-extrabold">Giriş yap</button>
         {% if error %}
-          <div class="alert error">{{ error }}</div>
+        <div class="alert alert-error">
+          <span>{{ error }}</span>
+        </div>
         {% endif %}
       </form>
     </div>

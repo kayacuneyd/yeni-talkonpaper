@@ -1,24 +1,26 @@
 {% extends "base.html" %}
 {% block content %}
-  <div class="container">
-    <div class="section-header">
+  <div class="container mx-auto px-4 max-w-[1180px]">
+    <div class="flex items-center justify-between my-9">
       <div>
-        <p class="eyebrow">Speakers</p>
-        <h2>Researchers presenting their own published work</h2>
+        <p class="text-xs uppercase tracking-widest font-extrabold text-success mb-1">Speakers</p>
+        <h2 class="text-3xl font-bold m-0">Researchers presenting their own published work</h2>
       </div>
     </div>
 
-    <div class="grid">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4.5">
       {% for speaker in speakers %}
-        <article class="card">
-          <h3><a href="{{ url_for('main.speaker_profile', speaker_id=speaker.id) }}">{{ speaker.full_name }}</a></h3>
-          <p class="meta">{{ speaker.affiliation }}</p>
-          <p class="muted">{{ speaker.bio_short or "Academic profile forthcoming." }}</p>
-          {% if speaker.country %}<div class="chip">{{ speaker.country }}</div>{% endif %}
-          <div class="chip">{{ speaker.talks|length }} Talk(s)</div>
-        </article>
+      <article class="card bg-base-100 shadow-card border border-base-300 p-4.5">
+        <h3 class="text-xl font-bold my-2.5"><a href="{{ url_for('main.speaker_profile', speaker_id=speaker.id) }}" class="link link-primary">{{ speaker.full_name }}</a></h3>
+        <p class="text-sm text-base-content/60 mb-2">{{ speaker.affiliation }}</p>
+        <p class="text-base-content/60 mb-3">{{ speaker.bio_short or "Academic profile forthcoming." }}</p>
+        <div>
+          {% if speaker.country %}<span class="badge badge-ghost border-base-300 mr-1.5 mb-1.5">{{ speaker.country }}</span>{% endif %}
+          <span class="badge badge-ghost border-base-300 mr-1.5 mb-1.5">{{ speaker.talks|length }} Talk(s)</span>
+        </div>
+      </article>
       {% else %}
-        <p class="muted">No speakers yet. Invite published authors to record.</p>
+      <p class="text-base-content/60">No speakers yet. Invite published authors to record.</p>
       {% endfor %}
     </div>
   </div>

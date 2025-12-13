@@ -1,33 +1,33 @@
 {% extends "base.html" %}
 {% block content %}
-  <div class="container">
-    <div class="section-header">
+  <div class="container mx-auto px-4 max-w-[1180px]">
+    <div class="flex items-center justify-between my-9">
       <div>
-        <p class="eyebrow">Paper index</p>
-        <h2>Published research linked to Talks</h2>
+        <p class="text-xs uppercase tracking-widest font-extrabold text-success mb-1">Paper index</p>
+        <h2 class="text-3xl font-bold m-0">Published research linked to Talks</h2>
       </div>
     </div>
 
-    <form method="get" class="search-bar">
-      <input type="number" name="year" value="{{ year or '' }}" placeholder="Filter by year" min="1900" max="2100" />
-      <button type="submit">Filter</button>
+    <form method="get" class="join w-full max-w-2xl mb-6">
+      <input type="number" name="year" value="{{ year or '' }}" placeholder="Filter by year" min="1900" max="2100" class="input input-bordered join-item flex-1" />
+      <button type="submit" class="btn btn-primary join-item normal-case font-extrabold">Filter</button>
     </form>
 
-    <div class="grid">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4.5">
       {% for paper in papers %}
-        <article class="card">
-          <p class="pill-text">Published {{ paper.publication_year }}</p>
-          <h3><a href="{{ url_for('main.paper_detail', paper_id=paper.id) }}">{{ paper.title }}</a></h3>
-          <p class="meta">{{ paper.authors }}</p>
-          <p class="muted">{{ paper.abstract[:180] }}{% if paper.abstract|length > 180 %}…{% endif %}</p>
-          {% if paper.talk %}
-            <div class="chip">Talk available</div>
-          {% else %}
-            <div class="chip">Talk pending</div>
-          {% endif %}
-        </article>
+      <article class="card bg-base-100 shadow-card border border-base-300 p-4.5">
+        <p class="badge badge-info badge-lg font-bold mb-2.5">Published {{ paper.publication_year }}</p>
+        <h3 class="text-xl font-bold my-2.5"><a href="{{ url_for('main.paper_detail', paper_id=paper.id) }}" class="link link-primary">{{ paper.title }}</a></h3>
+        <p class="text-sm text-base-content/60 mb-2">{{ paper.authors }}</p>
+        <p class="text-base-content/60 mb-3">{{ paper.abstract[:180] }}{% if paper.abstract|length > 180 %}…{% endif %}</p>
+        {% if paper.talk %}
+        <div class="badge badge-ghost border-base-300">Talk available</div>
+        {% else %}
+        <div class="badge badge-ghost border-base-300">Talk pending</div>
+        {% endif %}
+      </article>
       {% else %}
-        <p class="muted">No papers yet. Add a verified DOI or publication URL to start.</p>
+      <p class="text-base-content/60">No papers yet. Add a verified DOI or publication URL to start.</p>
       {% endfor %}
     </div>
   </div>

@@ -1,52 +1,66 @@
 {% extends "base.html" %}
 {% block content %}
-  <div class="container">
-    <div class="hero premium-hero">
-      <div>
-        <p class="eyebrow">Premium service</p>
-        <h1>English auto-dubbing + permanent, citable Talk pages.</h1>
-        <p>For scholars and institutions who need international visibility without travel. We ingest your recorded explanation, verify the paper, dub to English, and host with Cloudflare CDN.</p>
-        <div class="cta-row">
-          <a class="btn primary" href="mailto:hello@talkonpaper.example">Start a premium submission</a>
-          <a class="btn ghost" href="{{ url_for('main.talks_archive') }}">Browse examples</a>
+  <div class="container mx-auto px-4 max-w-[1180px]">
+    <div class="min-h-[500px] rounded-[20px] shadow-custom border border-white/10 text-neutral-content my-7 mb-12" style="background: linear-gradient(120deg, rgba(15, 23, 42, 0.85), rgba(17, 94, 89, 0.9)), url('/static/branding_2.png') center/cover;">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8 lg:p-12">
+        <div>
+          <p class="text-xs uppercase tracking-widest font-extrabold text-success-content mb-2">Premium service</p>
+          <h1 class="text-4xl lg:text-5xl font-extrabold leading-tight mb-3">English auto-dubbing + permanent, citable Talk pages.</h1>
+          <p class="text-lg text-neutral-content/90 mb-5">For scholars and institutions who need international visibility without travel. We ingest your recorded explanation, verify the paper, dub to English, and host with Cloudflare CDN.</p>
+          <div class="flex items-center gap-2.5 flex-wrap">
+            <a class="btn btn-primary shadow-button normal-case font-extrabold" href="mailto:hello@talkonpaper.example">Start a premium submission</a>
+            <a class="btn btn-ghost border border-white/20 hover:bg-white/10 normal-case font-extrabold" href="{{ url_for('main.talks_archive') }}">Browse examples</a>
+          </div>
         </div>
-      </div>
-      <div class="surface">
-        <p class="eyebrow">What you get</p>
-        <ul class="list">
-          <li><span class="badge premium">Auto-dubbing</span> AI English voice with quality checks</li>
-          <li><span class="badge">Signed URLs</span> Secure media delivery via Cloudflare R2</li>
-          <li><span class="badge">SEO</span> Structured data for Article + VideoObject</li>
-          <li><span class="badge">Archive</span> Evergreen URL for CVs and grant links</li>
-        </ul>
+        <div class="card bg-base-100 border border-base-300 shadow-lg p-5 text-base-content">
+          <p class="text-xs uppercase tracking-widest font-extrabold text-success mb-3">What you get</p>
+          <ul class="menu bg-base-200 rounded-box">
+            <li class="flex items-start gap-3 p-3">
+              <span class="badge badge-primary badge-lg font-extrabold">Auto-dubbing</span>
+              <span>AI English voice with quality checks</span>
+            </li>
+            <li class="flex items-start gap-3 p-3">
+              <span class="badge badge-success badge-lg font-extrabold">Signed URLs</span>
+              <span>Secure media delivery via Cloudflare R2</span>
+            </li>
+            <li class="flex items-start gap-3 p-3">
+              <span class="badge badge-success badge-lg font-extrabold">SEO</span>
+              <span>Structured data for Article + VideoObject</span>
+            </li>
+            <li class="flex items-start gap-3 p-3">
+              <span class="badge badge-success badge-lg font-extrabold">Archive</span>
+              <span>Evergreen URL for CVs and grant links</span>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
 
-    <div class="section-header">
-      <h2>Academic-fit pricing</h2>
+    <div class="flex items-center justify-between my-9">
+      <h2 class="text-2xl font-bold m-0">Academic-fit pricing</h2>
     </div>
-    <div class="grid">
-      <article class="card">
-        <p class="eyebrow">Registered</p>
-        <h3>Included</h3>
-        <p class="muted">Watch full talks, access transcripts, citation-friendly links.</p>
-        <ul class="list">
-          <li>Full video access</li>
-          <li>Transcript download</li>
-          <li>Basic SEO metadata</li>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4.5">
+      <article class="card bg-base-100 shadow-card border border-base-300 p-4.5">
+        <p class="text-xs uppercase tracking-widest font-extrabold text-success mb-2">Registered</p>
+        <h3 class="text-xl font-bold my-2.5">Included</h3>
+        <p class="text-base-content/60 mb-4">Watch full talks, access transcripts, citation-friendly links.</p>
+        <ul class="menu bg-base-200 rounded-box">
+          <li class="p-2">Full video access</li>
+          <li class="p-2">Transcript download</li>
+          <li class="p-2">Basic SEO metadata</li>
         </ul>
       </article>
-      <article class="card">
-        <p class="eyebrow">Academic Premium</p>
-        <h3>Service</h3>
-        <p class="muted">We process your video and publish a citable Talk page.</p>
-        <ul class="list">
-          <li>English auto-dubbing + QC</li>
-          <li>Hosted mp4/mp3 + previews</li>
-          <li>Canonical Talk page + DOI/URL reference</li>
-          <li>Analytics-ready metadata</li>
+      <article class="card bg-base-100 shadow-card border border-base-300 p-4.5">
+        <p class="text-xs uppercase tracking-widest font-extrabold text-success mb-2">Academic Premium</p>
+        <h3 class="text-xl font-bold my-2.5">Service</h3>
+        <p class="text-base-content/60 mb-4">We process your video and publish a citable Talk page.</p>
+        <ul class="menu bg-base-200 rounded-box mb-4">
+          <li class="p-2">English auto-dubbing + QC</li>
+          <li class="p-2">Hosted mp4/mp3 + previews</li>
+          <li class="p-2">Canonical Talk page + DOI/URL reference</li>
+          <li class="p-2">Analytics-ready metadata</li>
         </ul>
-        <a class="btn primary" href="mailto:hello@talkonpaper.example">Request a quote</a>
+        <a class="btn btn-primary shadow-button normal-case font-extrabold hover:-translate-y-px transition-all" href="mailto:hello@talkonpaper.example">Request a quote</a>
       </article>
     </div>
   </div>

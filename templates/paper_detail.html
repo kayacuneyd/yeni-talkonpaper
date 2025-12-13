@@ -1,36 +1,47 @@
 {% extends "base.html" %}
 {% block content %}
-  <div class="container">
-    <p class="eyebrow">Paper</p>
-    <h1>{{ paper.title }}</h1>
-    <p class="muted">{{ paper.authors }} · {{ paper.journal_or_publisher or "Published research" }} · {{ paper.publication_year }}</p>
+  <div class="container mx-auto px-4 max-w-[1180px]">
+    <p class="text-xs uppercase tracking-widest font-extrabold text-success mb-2">Paper</p>
+    <h1 class="text-4xl font-extrabold mb-3">{{ paper.title }}</h1>
+    <p class="text-base-content/60 mb-6">{{ paper.authors }} · {{ paper.journal_or_publisher or "Published research" }} · {{ paper.publication_year }}</p>
 
-    <div class="two-col">
-      <div class="surface">
-        <p class="eyebrow">Abstract</p>
-        <p class="serif">{{ paper.abstract }}</p>
+    <div class="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-4.5 items-start">
+      <div class="card bg-base-100 border border-base-300 shadow-sm rounded-2xl p-4">
+        <p class="text-xs uppercase tracking-widest font-extrabold text-success mb-3">Abstract</p>
+        <p class="font-serif text-neutral-800">{{ paper.abstract }}</p>
         {% if paper.keywords %}
-          <p class="eyebrow">Keywords</p>
+        <p class="text-xs uppercase tracking-widest font-extrabold text-success mt-4 mb-2">Keywords</p>
+        <div>
           {% for kw in paper.keywords.split(",") %}
-            <span class="chip">{{ kw.strip() }}</span>
+          <span class="badge badge-ghost border-base-300 mr-2 mb-2">{{ kw.strip() }}</span>
           {% endfor %}
+        </div>
         {% endif %}
       </div>
-      <div class="stack">
-        <div class="surface">
-          <p class="eyebrow">Metadata</p>
-          <div class="data-row"><strong>DOI/URL</strong><span class="muted">{{ paper.doi_or_url }}</span></div>
-          <div class="data-row"><strong>Language</strong><span>{{ paper.language_original|upper }}</span></div>
-          <div class="data-row"><strong>Verified</strong><span>{{ "Yes" if paper.verified_reference() else "Needs review" }}</span></div>
+      <div class="flex flex-col gap-3">
+        <div class="card bg-base-100 border border-base-300 shadow-sm rounded-2xl p-4">
+          <p class="text-xs uppercase tracking-widest font-extrabold text-success mb-3">Metadata</p>
+          <div class="grid grid-cols-[140px_1fr] gap-3 text-base-content/60 mb-2">
+            <strong class="text-base-content">DOI/URL</strong>
+            <span>{{ paper.doi_or_url }}</span>
+          </div>
+          <div class="grid grid-cols-[140px_1fr] gap-3 text-base-content/60 mb-2">
+            <strong class="text-base-content">Language</strong>
+            <span>{{ paper.language_original|upper }}</span>
+          </div>
+          <div class="grid grid-cols-[140px_1fr] gap-3 text-base-content/60">
+            <strong class="text-base-content">Verified</strong>
+            <span>{{ "Yes" if paper.verified_reference() else "Needs review" }}</span>
+          </div>
         </div>
-        <div class="surface">
-          <p class="eyebrow">Talk</p>
+        <div class="card bg-base-100 border border-base-300 shadow-sm rounded-2xl p-4">
+          <p class="text-xs uppercase tracking-widest font-extrabold text-success mb-3">Talk</p>
           {% if paper.talk %}
-            <p class="muted">This paper has an associated Talk.</p>
-            <a class="btn primary" href="{{ url_for('main.talk_detail', talk_id=paper.talk.id, slug=paper.talk.slug) }}">Watch Talk</a>
+          <p class="text-base-content/60 mb-3">This paper has an associated Talk.</p>
+          <a class="btn btn-primary shadow-button normal-case font-extrabold hover:-translate-y-px transition-all" href="{{ url_for('main.talk_detail', talk_id=paper.talk.id, slug=paper.talk.slug) }}">Watch Talk</a>
           {% else %}
-            <p class="muted">Talk not yet created.</p>
-            <a class="btn ghost" href="{{ url_for('main.premium') }}">Request dubbing</a>
+          <p class="text-base-content/60 mb-3">Talk not yet created.</p>
+          <a class="btn btn-ghost border border-base-300 normal-case font-extrabold" href="{{ url_for('main.premium') }}">Request dubbing</a>
           {% endif %}
         </div>
       </div>

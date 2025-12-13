@@ -1,60 +1,79 @@
 {% extends "base.html" %}
 {% block content %}
-  <div class="container">
-    <p class="eyebrow">Talk</p>
-    <h1>{{ talk.title }}</h1>
-    <p class="muted">From "{{ talk.paper.title }}" · {{ talk.paper.journal_or_publisher or "Published research" }} · {{ talk.paper.publication_year }}</p>
+  <div class="container mx-auto px-4 max-w-[1180px]">
+    <p class="text-xs uppercase tracking-widest font-extrabold text-success mb-2">Talk</p>
+    <h1 class="text-4xl font-extrabold mb-3">{{ talk.title }}</h1>
+    <p class="text-base-content/60 mb-6">From "{{ talk.paper.title }}" · {{ talk.paper.journal_or_publisher or "Published research" }} · {{ talk.paper.publication_year }}</p>
 
-    <div class="two-col">
-      <div class="stack">
+    <div class="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-4.5 items-start">
+      <div class="flex flex-col gap-3">
         {% if video_url %}
-          <div class="video-wrapper">
-            <video controls poster="{{ talk.thumbnail_object_key or '' }}">
-              <source src="{{ video_url }}" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
+        <div class="rounded-2xl overflow-hidden border border-base-300 bg-neutral shadow-lg">
+          <video controls poster="{{ talk.thumbnail_object_key or '' }}" class="w-full">
+            <source src="{{ video_url }}" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
         {% elif preview_url %}
-          <div class="notice">Preview available. Sign in for full access.</div>
+        <div class="alert bg-orange-50 text-orange-800 border border-dashed border-orange-300">
+          <span>Preview available. Sign in for full access.</span>
+        </div>
         {% else %}
-          <div class="notice">Video is processing or awaiting upload.</div>
+        <div class="alert bg-orange-50 text-orange-800 border border-dashed border-orange-300">
+          <span>Video is processing or awaiting upload.</span>
+        </div>
         {% endif %}
 
         {% if talk.transcript_text %}
-          <div class="surface">
-            <p class="eyebrow">Transcript</p>
-            <p class="muted">{{ talk.transcript_text[:800] }}{% if talk.transcript_text|length > 800 %}…{% endif %}</p>
-          </div>
+        <div class="card bg-base-100 border border-base-300 shadow-sm rounded-2xl p-4">
+          <p class="text-xs uppercase tracking-widest font-extrabold text-success mb-3">Transcript</p>
+          <p class="text-base-content/60">{{ talk.transcript_text[:800] }}{% if talk.transcript_text|length > 800 %}…{% endif %}</p>
+        </div>
         {% endif %}
       </div>
 
-      <div class="stack">
-        <div class="surface">
-          <p class="eyebrow">Speaker</p>
-          <h3>{{ talk.speaker.full_name }}</h3>
-          <p class="muted">{{ talk.speaker.affiliation }}</p>
-          {% if talk.speaker.country %}<div class="chip">{{ talk.speaker.country }}</div>{% endif %}
-          <p>{{ talk.speaker.bio_short }}</p>
+      <div class="flex flex-col gap-3">
+        <div class="card bg-base-100 border border-base-300 shadow-sm rounded-2xl p-4">
+          <p class="text-xs uppercase tracking-widest font-extrabold text-success mb-3">Speaker</p>
+          <h3 class="text-xl font-bold mb-1">{{ talk.speaker.full_name }}</h3>
+          <p class="text-base-content/60 mb-2">{{ talk.speaker.affiliation }}</p>
+          {% if talk.speaker.country %}<div class="badge badge-ghost border-base-300 mb-2">{{ talk.speaker.country }}</div>{% endif %}
+          <p class="text-base-content/80">{{ talk.speaker.bio_short }}</p>
         </div>
 
-        <div class="surface">
-          <p class="eyebrow">Paper</p>
-          <div class="data-row"><strong>Title</strong><span>{{ talk.paper.title }}</span></div>
-          <div class="data-row"><strong>Authors</strong><span>{{ talk.paper.authors }}</span></div>
-          <div class="data-row"><strong>Year</strong><span>{{ talk.paper.publication_year }}</span></div>
-          <div class="data-row"><strong>DOI/URL</strong><span class="muted">{{ talk.paper.doi_or_url }}</span></div>
-          <div class="data-row"><strong>Language</strong><span>{{ talk.paper.language_original|upper }}</span></div>
+        <div class="card bg-base-100 border border-base-300 shadow-sm rounded-2xl p-4">
+          <p class="text-xs uppercase tracking-widest font-extrabold text-success mb-3">Paper</p>
+          <div class="grid grid-cols-[140px_1fr] gap-3 text-base-content/60 mb-2">
+            <strong class="text-base-content">Title</strong>
+            <span>{{ talk.paper.title }}</span>
+          </div>
+          <div class="grid grid-cols-[140px_1fr] gap-3 text-base-content/60 mb-2">
+            <strong class="text-base-content">Authors</strong>
+            <span>{{ talk.paper.authors }}</span>
+          </div>
+          <div class="grid grid-cols-[140px_1fr] gap-3 text-base-content/60 mb-2">
+            <strong class="text-base-content">Year</strong>
+            <span>{{ talk.paper.publication_year }}</span>
+          </div>
+          <div class="grid grid-cols-[140px_1fr] gap-3 text-base-content/60 mb-2">
+            <strong class="text-base-content">DOI/URL</strong>
+            <span class="text-base-content/60">{{ talk.paper.doi_or_url }}</span>
+          </div>
+          <div class="grid grid-cols-[140px_1fr] gap-3 text-base-content/60">
+            <strong class="text-base-content">Language</strong>
+            <span>{{ talk.paper.language_original|upper }}</span>
+          </div>
         </div>
 
-        <div class="surface">
-          <p class="eyebrow">Access</p>
-          <p class="muted">Access level: {{ talk.access_level|capitalize }}{% if talk.is_dubbed %} · English dubbed{% endif %}</p>
+        <div class="card bg-base-100 border border-base-300 shadow-sm rounded-2xl p-4">
+          <p class="text-xs uppercase tracking-widest font-extrabold text-success mb-3">Access</p>
+          <p class="text-base-content/60 mb-3">Access level: {{ talk.access_level|capitalize }}{% if talk.is_dubbed %} · English dubbed{% endif %}</p>
           {% if audio_url %}
-            <audio controls style="width:100%;">
-              <source src="{{ audio_url }}" type="audio/mpeg" />
-            </audio>
+          <audio controls class="w-full mb-3">
+            <source src="{{ audio_url }}" type="audio/mpeg" />
+          </audio>
           {% endif %}
-          <a class="btn primary" href="{{ url_for('main.premium') }}">Upgrade for dubbing</a>
+          <a class="btn btn-primary shadow-button normal-case font-extrabold hover:-translate-y-px transition-all" href="{{ url_for('main.premium') }}">Upgrade for dubbing</a>
         </div>
       </div>
     </div>

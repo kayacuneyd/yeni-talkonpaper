@@ -1,32 +1,34 @@
 {% extends "base.html" %}
 {% block content %}
-  <div class="container">
-    <div class="section-header">
+  <div class="container mx-auto px-4 max-w-[1180px]">
+    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between my-9 gap-3">
       <div>
-        <p class="eyebrow">Talks archive</p>
-        <h2>English-dubbed explanations tied to published papers</h2>
+        <p class="text-xs uppercase tracking-widest font-extrabold text-success mb-1">Talks archive</p>
+        <h2 class="text-3xl font-bold m-0">English-dubbed explanations tied to published papers</h2>
       </div>
-      <a class="btn ghost" href="{{ url_for('main.premium') }}">Upgrade for dubbing</a>
+      <a class="btn btn-ghost border border-base-300 normal-case font-extrabold" href="{{ url_for('main.premium') }}">Upgrade for dubbing</a>
     </div>
 
-    <form method="get" class="search-bar">
-      <input type="search" name="q" value="{{ search or '' }}" placeholder="Search by title or topic" />
-      <button type="submit">Search</button>
+    <form method="get" class="join w-full max-w-2xl mb-6">
+      <input type="search" name="q" value="{{ search or '' }}" placeholder="Search by title or topic" class="input input-bordered join-item flex-1" />
+      <button type="submit" class="btn btn-primary join-item normal-case font-extrabold">Search</button>
     </form>
 
-    <div class="grid">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4.5">
       {% for talk in talks %}
-        <article class="card">
-          <div class="pill-text">{{ talk.access_level|capitalize }} access</div>
-          <h3><a href="{{ url_for('main.talk_detail', talk_id=talk.id, slug=talk.slug) }}">{{ talk.title }}</a></h3>
-          <p class="meta">{{ talk.speaker.full_name }} · {{ talk.speaker.affiliation }}</p>
-          <p class="muted">{{ talk.summary or talk.paper.abstract[:150] ~ "…" }}</p>
-          <div class="chip">{{ talk.duration_minutes }} min</div>
-          <div class="chip">{{ talk.paper.publication_year }}</div>
-          {% if talk.is_dubbed %}<div class="chip">Dubbed</div>{% endif %}
-        </article>
+      <article class="card bg-base-100 shadow-card border border-base-300 p-4.5">
+        <div class="badge badge-info badge-lg font-bold mb-2.5">{{ talk.access_level|capitalize }} access</div>
+        <h3 class="text-xl font-bold my-2.5"><a href="{{ url_for('main.talk_detail', talk_id=talk.id, slug=talk.slug) }}" class="link link-primary">{{ talk.title }}</a></h3>
+        <p class="text-sm text-base-content/60 mb-2">{{ talk.speaker.full_name }} · {{ talk.speaker.affiliation }}</p>
+        <p class="text-base-content/60 mb-2">{{ talk.summary or talk.paper.abstract[:150] ~ "…" }}</p>
+        <div>
+          <span class="badge badge-ghost border-base-300 mr-1.5 mb-1.5">{{ talk.duration_minutes }} min</span>
+          <span class="badge badge-ghost border-base-300 mr-1.5 mb-1.5">{{ talk.paper.publication_year }}</span>
+          {% if talk.is_dubbed %}<span class="badge badge-ghost border-base-300 mr-1.5 mb-1.5">Dubbed</span>{% endif %}
+        </div>
+      </article>
       {% else %}
-        <p class="muted">No talks found. Adjust filters or add a verified paper.</p>
+      <p class="text-base-content/60">No talks found. Adjust filters or add a verified paper.</p>
       {% endfor %}
     </div>
   </div>

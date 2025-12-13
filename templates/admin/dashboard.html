@@ -1,155 +1,243 @@
 {% extends "base.html" %}
 {% block content %}
-  <div class="container">
-    <div class="section-header">
+  <div class="container mx-auto px-4 max-w-[1180px]">
+    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between my-9 gap-3">
       <div>
-        <p class="eyebrow">Admin panel</p>
-        <h1>İçerik kontrolü</h1>
-        <p class="muted">Konuşma, makale ve konuşmacı detaylarını buradan yönetin.</p>
+        <p class="text-xs uppercase tracking-widest font-extrabold text-success mb-1">Admin panel</p>
+        <h1 class="text-3xl font-bold m-0">İçerik kontrolü</h1>
+        <p class="text-base-content/60">Konuşma, makale ve konuşmacı detaylarını buradan yönetin.</p>
       </div>
-      <div class="cta-row">
-        <a class="btn ghost" href="{{ url_for('admin.logout') }}">Çıkış</a>
+      <div class="flex items-center gap-2.5">
+        <a class="btn btn-ghost border border-base-300 normal-case font-extrabold" href="{{ url_for('admin.logout') }}">Çıkış</a>
       </div>
     </div>
 
-    <div class="grid">
-      <div class="card">
-        <div class="badge">Özet</div>
-        <h3>Durum</h3>
-        <div class="data-row"><strong>Talks</strong><span>{{ stats.talks }}</span></div>
-        <div class="data-row"><strong>Papers</strong><span>{{ stats.papers }}</span></div>
-        <div class="data-row"><strong>Speakers</strong><span>{{ stats.speakers }}</span></div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4.5">
+      <div class="card bg-base-100 shadow-card border border-base-300 p-5">
+        <div class="badge badge-success badge-lg font-extrabold mb-3">Özet</div>
+        <h3 class="text-xl font-bold mb-3">Durum</h3>
+        <div class="grid grid-cols-[100px_1fr] gap-3 text-base-content/60 mb-2">
+          <strong class="text-base-content">Talks</strong>
+          <span>{{ stats.talks }}</span>
+        </div>
+        <div class="grid grid-cols-[100px_1fr] gap-3 text-base-content/60 mb-2">
+          <strong class="text-base-content">Papers</strong>
+          <span>{{ stats.papers }}</span>
+        </div>
+        <div class="grid grid-cols-[100px_1fr] gap-3 text-base-content/60">
+          <strong class="text-base-content">Speakers</strong>
+          <span>{{ stats.speakers }}</span>
+        </div>
       </div>
-      <div class="card">
-        <div class="badge alt">Son konuşmalar</div>
+      <div class="card bg-base-100 shadow-card border border-base-300 p-5">
+        <div class="badge bg-orange-50 text-orange-800 border-orange-200 badge-lg font-extrabold mb-3">Son konuşmalar</div>
         {% if latest_talks %}
-          <ul class="list">
-            {% for talk in latest_talks %}
-              <li>
-                <div>
-                  <strong>{{ talk.title }}</strong><br />
-                  <span class="muted">{{ talk.speaker.full_name }} · {{ talk.paper.publication_year }}</span>
-                </div>
-              </li>
-            {% endfor %}
-          </ul>
+        <ul class="menu bg-base-200 rounded-box">
+          {% for talk in latest_talks %}
+          <li class="p-2">
+            <div>
+              <strong class="font-bold">{{ talk.title }}</strong>
+              <span class="text-base-content/60 text-sm">{{ talk.speaker.full_name }} · {{ talk.paper.publication_year }}</span>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
         {% else %}
-          <p class="muted">Henüz konuşma yok.</p>
+        <p class="text-base-content/60">Henüz konuşma yok.</p>
         {% endif %}
       </div>
-      <div class="card">
-        <div class="badge">Son makaleler</div>
+      <div class="card bg-base-100 shadow-card border border-base-300 p-5">
+        <div class="badge badge-success badge-lg font-extrabold mb-3">Son makaleler</div>
         {% if latest_papers %}
-          <ul class="list">
-            {% for paper in latest_papers %}
-              <li>
-                <div>
-                  <strong>{{ paper.title }}</strong><br />
-                  <span class="muted">{{ paper.authors }}</span>
-                </div>
-              </li>
-            {% endfor %}
-          </ul>
+        <ul class="menu bg-base-200 rounded-box">
+          {% for paper in latest_papers %}
+          <li class="p-2">
+            <div>
+              <strong class="font-bold">{{ paper.title }}</strong>
+              <span class="text-base-content/60 text-sm">{{ paper.authors }}</span>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
         {% else %}
-          <p class="muted">Henüz makale yok.</p>
+        <p class="text-base-content/60">Henüz makale yok.</p>
         {% endif %}
       </div>
     </div>
 
-    <section style="margin-top:28px;">
-      <div class="section-header">
-        <h2>Hızlı ekleme</h2>
-        <p class="muted">Bir konuşmacı + makale + konuşmayı aynı anda ekleyin.</p>
+    <section class="mt-7">
+      <div class="flex items-center justify-between my-9">
+        <div>
+          <h2 class="text-2xl font-bold m-0">Hızlı ekleme</h2>
+          <p class="text-base-content/60">Bir konuşmacı + makale + konuşmayı aynı anda ekleyin.</p>
+        </div>
       </div>
-      <form class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:16px;" method="post" action="{{ url_for('admin.create_talk') }}">
-        <div class="surface">
-          <p class="eyebrow">Konuşmacı</p>
-          <label class="input-label">İsim
-            <input type="text" name="speaker_name" required placeholder="Dr. Amina Patel" />
+      <form class="grid grid-cols-1 lg:grid-cols-3 gap-4" method="post" action="{{ url_for('admin.create_talk') }}">
+        <div class="card bg-base-100 border border-base-300 shadow-sm rounded-2xl p-4">
+          <p class="text-xs uppercase tracking-widest font-extrabold text-success mb-3">Konuşmacı</p>
+          <label class="form-control mb-3">
+            <div class="label">
+              <span class="label-text font-bold">İsim</span>
+            </div>
+            <input type="text" name="speaker_name" required placeholder="Dr. Amina Patel" class="input input-bordered w-full font-semibold" />
           </label>
-          <label class="input-label">Kurum
-            <input type="text" name="speaker_affiliation" required placeholder="University of Cape Town" />
+          <label class="form-control mb-3">
+            <div class="label">
+              <span class="label-text font-bold">Kurum</span>
+            </div>
+            <input type="text" name="speaker_affiliation" required placeholder="University of Cape Town" class="input input-bordered w-full font-semibold" />
           </label>
-          <label class="input-label">Ülke
-            <input type="text" name="speaker_country" placeholder="South Africa" />
+          <label class="form-control mb-3">
+            <div class="label">
+              <span class="label-text font-bold">Ülke</span>
+            </div>
+            <input type="text" name="speaker_country" placeholder="South Africa" class="input input-bordered w-full font-semibold" />
           </label>
-          <label class="input-label">Kısa bio
-            <textarea name="speaker_bio" rows="3" placeholder="Research focus, lab, awards"></textarea>
+          <label class="form-control mb-3">
+            <div class="label">
+              <span class="label-text font-bold">Kısa bio</span>
+            </div>
+            <textarea name="speaker_bio" rows="3" placeholder="Research focus, lab, awards" class="textarea textarea-bordered w-full font-semibold"></textarea>
           </label>
-          <label class="input-label">Web / profil
-            <input type="url" name="speaker_site" placeholder="https://example.org/profile" />
-          </label>
-        </div>
-
-        <div class="surface">
-          <p class="eyebrow">Makale</p>
-          <label class="input-label">Başlık
-            <input type="text" name="paper_title" required placeholder="Adaptive Water Infrastructure" />
-          </label>
-          <label class="input-label">Yazarlar
-            <input type="text" name="paper_authors" required placeholder="A. Patel, J. Ruiz" />
-          </label>
-          <label class="input-label">DOI / URL
-            <input type="text" name="paper_doi" required placeholder="10.xxxx/xxxx" />
-          </label>
-          <label class="input-label">Yıl
-            <input type="number" name="paper_year" required min="1900" max="2100" />
-          </label>
-          <label class="input-label">Dil
-            <input type="text" name="paper_language" placeholder="en" />
-          </label>
-          <label class="input-label">Dergi / Yayıncı
-            <input type="text" name="paper_journal" placeholder="Journal of Climate Adaptation" />
-          </label>
-          <label class="input-label">Anahtar kelimeler
-            <input type="text" name="paper_keywords" placeholder="climate, water, infrastructure" />
-          </label>
-          <label class="input-label">PDF object key
-            <input type="text" name="paper_pdf_key" placeholder="uploads/paper.pdf" />
-          </label>
-          <label class="input-label">Özet
-            <textarea name="paper_abstract" rows="3" placeholder="Short abstract..."></textarea>
+          <label class="form-control">
+            <div class="label">
+              <span class="label-text font-bold">Web / profil</span>
+            </div>
+            <input type="url" name="speaker_site" placeholder="https://example.org/profile" class="input input-bordered w-full font-semibold" />
           </label>
         </div>
 
-        <div class="surface">
-          <p class="eyebrow">Konuşma</p>
-          <label class="input-label">Başlık
-            <input type="text" name="talk_title" required placeholder="Adaptive Water Infrastructure" />
+        <div class="card bg-base-100 border border-base-300 shadow-sm rounded-2xl p-4">
+          <p class="text-xs uppercase tracking-widest font-extrabold text-success mb-3">Makale</p>
+          <label class="form-control mb-3">
+            <div class="label">
+              <span class="label-text font-bold">Başlık</span>
+            </div>
+            <input type="text" name="paper_title" required placeholder="Adaptive Water Infrastructure" class="input input-bordered w-full font-semibold" />
           </label>
-          <label class="input-label">Özet
-            <textarea name="talk_summary" rows="3" placeholder="Short summary"></textarea>
+          <label class="form-control mb-3">
+            <div class="label">
+              <span class="label-text font-bold">Yazarlar</span>
+            </div>
+            <input type="text" name="paper_authors" required placeholder="A. Patel, J. Ruiz" class="input input-bordered w-full font-semibold" />
           </label>
-          <label class="input-label">Süre (saniye)
-            <input type="number" name="talk_duration" min="0" placeholder="780" />
+          <label class="form-control mb-3">
+            <div class="label">
+              <span class="label-text font-bold">DOI / URL</span>
+            </div>
+            <input type="text" name="paper_doi" required placeholder="10.xxxx/xxxx" class="input input-bordered w-full font-semibold" />
           </label>
-          <label class="input-label">Konuşma tarihi
-            <input type="date" name="talk_date" />
+          <label class="form-control mb-3">
+            <div class="label">
+              <span class="label-text font-bold">Yıl</span>
+            </div>
+            <input type="number" name="paper_year" required min="1900" max="2100" class="input input-bordered w-full font-semibold" />
           </label>
-          <label class="input-label">Erişim seviyesi
-            <select name="access_level">
+          <label class="form-control mb-3">
+            <div class="label">
+              <span class="label-text font-bold">Dil</span>
+            </div>
+            <input type="text" name="paper_language" placeholder="en" class="input input-bordered w-full font-semibold" />
+          </label>
+          <label class="form-control mb-3">
+            <div class="label">
+              <span class="label-text font-bold">Dergi / Yayıncı</span>
+            </div>
+            <input type="text" name="paper_journal" placeholder="Journal of Climate Adaptation" class="input input-bordered w-full font-semibold" />
+          </label>
+          <label class="form-control mb-3">
+            <div class="label">
+              <span class="label-text font-bold">Anahtar kelimeler</span>
+            </div>
+            <input type="text" name="paper_keywords" placeholder="climate, water, infrastructure" class="input input-bordered w-full font-semibold" />
+          </label>
+          <label class="form-control mb-3">
+            <div class="label">
+              <span class="label-text font-bold">PDF object key</span>
+            </div>
+            <input type="text" name="paper_pdf_key" placeholder="uploads/paper.pdf" class="input input-bordered w-full font-semibold" />
+          </label>
+          <label class="form-control">
+            <div class="label">
+              <span class="label-text font-bold">Özet</span>
+            </div>
+            <textarea name="paper_abstract" rows="3" placeholder="Short abstract..." class="textarea textarea-bordered w-full font-semibold"></textarea>
+          </label>
+        </div>
+
+        <div class="card bg-base-100 border border-base-300 shadow-sm rounded-2xl p-4">
+          <p class="text-xs uppercase tracking-widest font-extrabold text-success mb-3">Konuşma</p>
+          <label class="form-control mb-3">
+            <div class="label">
+              <span class="label-text font-bold">Başlık</span>
+            </div>
+            <input type="text" name="talk_title" required placeholder="Adaptive Water Infrastructure" class="input input-bordered w-full font-semibold" />
+          </label>
+          <label class="form-control mb-3">
+            <div class="label">
+              <span class="label-text font-bold">Özet</span>
+            </div>
+            <textarea name="talk_summary" rows="3" placeholder="Short summary" class="textarea textarea-bordered w-full font-semibold"></textarea>
+          </label>
+          <label class="form-control mb-3">
+            <div class="label">
+              <span class="label-text font-bold">Süre (saniye)</span>
+            </div>
+            <input type="number" name="talk_duration" min="0" placeholder="780" class="input input-bordered w-full font-semibold" />
+          </label>
+          <label class="form-control mb-3">
+            <div class="label">
+              <span class="label-text font-bold">Konuşma tarihi</span>
+            </div>
+            <input type="date" name="talk_date" class="input input-bordered w-full font-semibold" />
+          </label>
+          <label class="form-control mb-3">
+            <div class="label">
+              <span class="label-text font-bold">Erişim seviyesi</span>
+            </div>
+            <select name="access_level" class="select select-bordered w-full font-semibold">
               <option value="public">Public</option>
               <option value="registered">Registered</option>
               <option value="academic_premium">Academic premium</option>
             </select>
           </label>
-          <label class="input-label"><input type="checkbox" name="is_dubbed" /> İngilizce dublaj</label>
-          <label class="input-label">Video object key
-            <input type="text" name="video_object_key" required placeholder="media/talk.mp4" />
+          <label class="form-control mb-3">
+            <label class="label cursor-pointer justify-start gap-2">
+              <input type="checkbox" name="is_dubbed" class="checkbox checkbox-primary" />
+              <span class="label-text font-bold">İngilizce dublaj</span>
+            </label>
           </label>
-          <label class="input-label">Preview video key
-            <input type="text" name="preview_video_key" placeholder="media/preview.mp4" />
+          <label class="form-control mb-3">
+            <div class="label">
+              <span class="label-text font-bold">Video object key</span>
+            </div>
+            <input type="text" name="video_object_key" required placeholder="media/talk.mp4" class="input input-bordered w-full font-semibold" />
           </label>
-          <label class="input-label">Audio object key
-            <input type="text" name="audio_object_key" placeholder="media/talk.mp3" />
+          <label class="form-control mb-3">
+            <div class="label">
+              <span class="label-text font-bold">Preview video key</span>
+            </div>
+            <input type="text" name="preview_video_key" placeholder="media/preview.mp4" class="input input-bordered w-full font-semibold" />
           </label>
-          <label class="input-label">Thumbnail key
-            <input type="text" name="thumbnail_object_key" placeholder="media/thumb.jpg" />
+          <label class="form-control mb-3">
+            <div class="label">
+              <span class="label-text font-bold">Audio object key</span>
+            </div>
+            <input type="text" name="audio_object_key" placeholder="media/talk.mp3" class="input input-bordered w-full font-semibold" />
           </label>
-          <label class="input-label">Transkript
-            <textarea name="transcript_text" rows="3" placeholder="Full transcript..."></textarea>
+          <label class="form-control mb-3">
+            <div class="label">
+              <span class="label-text font-bold">Thumbnail key</span>
+            </div>
+            <input type="text" name="thumbnail_object_key" placeholder="media/thumb.jpg" class="input input-bordered w-full font-semibold" />
           </label>
-          <button type="submit" class="btn primary" style="width:100%; margin-top:10px;">Konuşma oluştur</button>
+          <label class="form-control mb-3">
+            <div class="label">
+              <span class="label-text font-bold">Transkript</span>
+            </div>
+            <textarea name="transcript_text" rows="3" placeholder="Full transcript..." class="textarea textarea-bordered w-full font-semibold"></textarea>
+          </label>
+          <button type="submit" class="btn btn-primary w-full normal-case font-extrabold mt-2.5">Konuşma oluştur</button>
         </div>
       </form>
     </section>

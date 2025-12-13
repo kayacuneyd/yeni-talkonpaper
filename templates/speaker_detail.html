@@ -1,32 +1,33 @@
 {% extends "base.html" %}
 {% block content %}
-  <div class="container">
-    <p class="eyebrow">Speaker</p>
-    <h1>{{ speaker.full_name }}</h1>
-    <p class="muted">{{ speaker.affiliation }}{% if speaker.country %} · {{ speaker.country }}{% endif %}</p>
-    <div class="two-col">
-      <div class="surface">
-        <p class="eyebrow">Bio</p>
-        <p>{{ speaker.bio_short or "Biography coming soon." }}</p>
+  <div class="container mx-auto px-4 max-w-[1180px]">
+    <p class="text-xs uppercase tracking-widest font-extrabold text-success mb-2">Speaker</p>
+    <h1 class="text-4xl font-extrabold mb-3">{{ speaker.full_name }}</h1>
+    <p class="text-base-content/60 mb-6">{{ speaker.affiliation }}{% if speaker.country %} · {{ speaker.country }}{% endif %}</p>
+
+    <div class="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-4.5 items-start">
+      <div class="card bg-base-100 border border-base-300 shadow-sm rounded-2xl p-4">
+        <p class="text-xs uppercase tracking-widest font-extrabold text-success mb-3">Bio</p>
+        <p class="text-base-content/80">{{ speaker.bio_short or "Biography coming soon." }}</p>
         {% if speaker.website_or_profile %}
-          <p><a href="{{ speaker.website_or_profile }}" target="_blank" rel="noreferrer">External profile</a></p>
+        <p class="mt-3"><a href="{{ speaker.website_or_profile }}" target="_blank" rel="noreferrer" class="link link-primary font-semibold">External profile →</a></p>
         {% endif %}
       </div>
-      <div class="surface">
-        <p class="eyebrow">Talks</p>
+      <div class="card bg-base-100 border border-base-300 shadow-sm rounded-2xl p-4">
+        <p class="text-xs uppercase tracking-widest font-extrabold text-success mb-3">Talks</p>
         {% if speaker.talks %}
-          <ul class="list">
-            {% for talk in speaker.talks %}
-              <li>
-                <div>
-                  <a href="{{ url_for('main.talk_detail', talk_id=talk.id, slug=talk.slug) }}"><strong>{{ talk.title }}</strong></a>
-                  <div class="muted">From "{{ talk.paper.title }}" · {{ talk.paper.publication_year }}</div>
-                </div>
-              </li>
-            {% endfor %}
-          </ul>
+        <ul class="menu bg-base-200 rounded-box">
+          {% for talk in speaker.talks %}
+          <li class="p-3">
+            <div>
+              <a href="{{ url_for('main.talk_detail', talk_id=talk.id, slug=talk.slug) }}" class="font-bold link link-primary">{{ talk.title }}</a>
+              <div class="text-base-content/60">From "{{ talk.paper.title }}" · {{ talk.paper.publication_year }}</div>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
         {% else %}
-          <p class="muted">No talks published yet.</p>
+        <p class="text-base-content/60">No talks published yet.</p>
         {% endif %}
       </div>
     </div>
