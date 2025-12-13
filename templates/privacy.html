@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% set title = "Privacy Policy" %}
+{% block content %}
+  <div class="container mx-auto px-4 max-w-[900px]">
+    <div class="mb-8">
+      <h1 class="text-4xl font-extrabold mb-4">Privacy Policy</h1>
+      <p class="text-base-content/70">Last updated: January 13, 2025</p>
+    </div>
+
+    <div class="prose prose-lg max-w-none">
+      <section class="mb-8">
+        <h2 class="text-2xl font-extrabold mb-4">Introduction</h2>
+        <p class="text-base-content/80 mb-4">
+          TalkOnPaper ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform.
+        </p>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-2xl font-extrabold mb-4">Information We Collect</h2>
+
+        <h3 class="text-xl font-bold mb-3">Personal Information</h3>
+        <p class="text-base-content/80 mb-3">When you register for an account, we collect:</p>
+        <ul class="list-disc pl-6 mb-4 text-base-content/80">
+          <li>Email address</li>
+          <li>Account credentials (encrypted passwords)</li>
+          <li>Subscription level preferences</li>
+        </ul>
+
+        <h3 class="text-xl font-bold mb-3">Academic Content</h3>
+        <p class="text-base-content/80 mb-3">For researchers submitting talks, we collect:</p>
+        <ul class="list-disc pl-6 mb-4 text-base-content/80">
+          <li>Video recordings and audio files</li>
+          <li>Paper metadata (title, DOI, authors, abstract)</li>
+          <li>Speaker information (name, affiliation, country)</li>
+          <li>Transcript text</li>
+        </ul>
+
+        <h3 class="text-xl font-bold mb-3">Usage Data</h3>
+        <p class="text-base-content/80 mb-4">We automatically collect:</p>
+        <ul class="list-disc pl-6 mb-4 text-base-content/80">
+          <li>IP address and browser information</li>
+          <li>Pages viewed and time spent</li>
+          <li>Video playback statistics</li>
+        </ul>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-2xl font-extrabold mb-4">How We Use Your Information</h2>
+        <ul class="list-disc pl-6 mb-4 text-base-content/80">
+          <li>To provide and maintain our service</li>
+          <li>To process video dubbing requests</li>
+          <li>To manage user accounts and subscriptions</li>
+          <li>To send service-related communications</li>
+          <li>To improve platform functionality and user experience</li>
+          <li>To comply with legal obligations</li>
+        </ul>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-2xl font-extrabold mb-4">Data Storage and Security</h2>
+        <p class="text-base-content/80 mb-4">
+          We use industry-standard security measures to protect your data:
+        </p>
+        <ul class="list-disc pl-6 mb-4 text-base-content/80">
+          <li>Encrypted password storage using bcrypt hashing</li>
+          <li>Secure video storage via Cloudflare R2</li>
+          <li>HTTPS encryption for all data transmission</li>
+          <li>Regular security audits and updates</li>
+        </ul>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-2xl font-extrabold mb-4">Data Sharing and Disclosure</h2>
+        <p class="text-base-content/80 mb-4">
+          We do not sell your personal information. We may share data only in these circumstances:
+        </p>
+        <ul class="list-disc pl-6 mb-4 text-base-content/80">
+          <li><strong>Public Content:</strong> Talks, papers, and speaker profiles you choose to publish are publicly accessible</li>
+          <li><strong>Service Providers:</strong> With third-party services that help us operate (e.g., cloud storage, analytics)</li>
+          <li><strong>Legal Requirements:</strong> When required by law or to protect our rights</li>
+        </ul>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-2xl font-extrabold mb-4">Your Rights</h2>
+        <p class="text-base-content/80 mb-3">You have the right to:</p>
+        <ul class="list-disc pl-6 mb-4 text-base-content/80">
+          <li>Access your personal data</li>
+          <li>Correct inaccurate information</li>
+          <li>Request deletion of your account and data</li>
+          <li>Opt out of marketing communications</li>
+          <li>Export your data in a portable format</li>
+        </ul>
+        <p class="text-base-content/80">
+          To exercise these rights, please contact us at <a href="mailto:hello@talkonpaper.example" class="link link-primary">hello@talkonpaper.example</a>
+        </p>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-2xl font-extrabold mb-4">Cookies and Tracking</h2>
+        <p class="text-base-content/80 mb-4">
+          We use cookies and similar technologies to:
+        </p>
+        <ul class="list-disc pl-6 mb-4 text-base-content/80">
+          <li>Maintain your login session</li>
+          <li>Remember your preferences</li>
+          <li>Analyze site usage (via analytics tools)</li>
+        </ul>
+        <p class="text-base-content/80">
+          You can control cookies through your browser settings.
+        </p>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-2xl font-extrabold mb-4">Children's Privacy</h2>
+        <p class="text-base-content/80">
+          Our service is not directed to individuals under 18. We do not knowingly collect personal information from children.
+        </p>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-2xl font-extrabold mb-4">Changes to This Policy</h2>
+        <p class="text-base-content/80">
+          We may update this Privacy Policy periodically. We will notify you of material changes by posting the new policy on this page and updating the "Last updated" date.
+        </p>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-2xl font-extrabold mb-4">Contact Information</h2>
+        <p class="text-base-content/80 mb-4">
+          For privacy-related questions or concerns, please contact:
+        </p>
+        <div class="card bg-base-100 border border-base-300 p-6">
+          <p class="font-bold mb-2">TalkOnPaper Privacy Team</p>
+          <p class="mb-1"><strong>Project Lead:</strong> Dilan Güneş</p>
+          <p class="mb-1"><strong>Developer:</strong> Cüneyt Kaya</p>
+          <p class="mb-1"><strong>Social Media & Communications:</strong> Melike Nil Yıldız Kaya</p>
+          <p class="mb-3"><strong>Location:</strong> Kornwestheim, Germany</p>
+          <p><strong>Email:</strong> <a href="mailto:hello@talkonpaper.example" class="link link-primary">hello@talkonpaper.example</a></p>
+        </div>
+      </section>
+    </div>
+  </div>
+{% endblock %}

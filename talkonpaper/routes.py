@@ -545,6 +545,22 @@ def contact():
     )
 
 
+@main_bp.route("/privacy")
+def privacy():
+    return render_template(
+        "privacy.html",
+        canonical_url=canonical_path(request.path),
+    )
+
+
+@main_bp.route("/terms")
+def terms():
+    return render_template(
+        "terms.html",
+        canonical_url=canonical_path(request.path),
+    )
+
+
 @main_bp.route("/healthz")
 def healthz():
     # Lightweight liveness endpoint.

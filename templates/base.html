@@ -116,15 +116,20 @@
     >
       <div class="container mx-auto px-4 max-w-[1180px]">
         <div class="navbar-start">
-          <div class="flex flex-col gap-1">
-            <a
-              href="{{ url_for('main.home') }}"
-              class="text-xl font-extrabold tracking-tight text-base-content"
-              >TalkOnPaper</a
-            >
-            <span class="text-sm text-base-content/70 font-medium"
-              >Academic videos grounded in published papers</span
-            >
+          <div class="flex items-center gap-3">
+            <a href="{{ url_for('main.home') }}" class="flex-shrink-0">
+              <img src="{{ url_for('static', filename='logo.svg') }}" alt="TalkOnPaper Logo" class="h-10 w-auto" />
+            </a>
+            <div class="flex flex-col gap-1">
+              <a
+                href="{{ url_for('main.home') }}"
+                class="text-xl font-extrabold tracking-tight text-base-content"
+                >TalkOnPaper</a
+              >
+              <span class="text-sm text-base-content/70 font-medium"
+                >Academic videos grounded in published papers</span
+              >
+            </div>
           </div>
         </div>
         <div class="navbar-end">
@@ -290,8 +295,8 @@
                 class="link link-hover block"
                 >Blog</a
               >
-              <a href="#" class="link link-hover block">Privacy</a>
-              <a href="#" class="link link-hover block">Terms</a>
+              <a href="{{ url_for('main.privacy') }}" class="link link-hover block">Privacy</a>
+              <a href="{{ url_for('main.terms') }}" class="link link-hover block">Terms</a>
             </div>
           </div>
         </div>

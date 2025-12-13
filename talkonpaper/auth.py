@@ -67,6 +67,11 @@ def login():
                 else:
                     login_user(user)
                     flash(f"Welcome back, {user.email}!", "success")
+
+                    # Redirect admin users to admin dashboard
+                    if user.role == "admin":
+                        return redirect(url_for("admin.dashboard"))
+
                     # Redirect to next page or home
                     next_page = request.args.get("next")
                     return redirect(next_page) if next_page else redirect(url_for("main.home"))
