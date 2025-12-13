@@ -14,56 +14,76 @@
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:wght@500;600&display=swap"
       rel="stylesheet"
     />
-    <!-- Tailwind CSS Play CDN + DaisyUI -->
+    <!-- Tailwind CSS Play CDN + Custom Config -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
-
     <script>
       tailwind.config = {
-        daisyui: {
-          themes: [
-            {
-              talkonpaper: {
-                "primary": "#4ECDC4",
-                "primary-content": "#ffffff",
-                "secondary": "#1B3A52",
-                "secondary-content": "#ffffff",
-                "accent": "#FF6B35",
-                "accent-content": "#ffffff",
-                "neutral": "#0f172a",
-                "neutral-content": "#f8fafc",
-                "base-100": "#f8f7f2",
-                "base-200": "#f2efe6",
-                "base-300": "#e5e1d8",
-                "base-content": "#0f172a",
-                "info": "#4ECDC4",
-                "success": "#0f766e",
-                "warning": "#f97316",
-                "error": "#dc2626",
-                "--rounded-box": "1rem",
-                "--rounded-btn": "0.75rem",
-                "--rounded-badge": "999px",
-                "--animation-btn": "0.18s",
-                "--btn-focus-scale": "0.98",
-              },
-            },
-          ],
-        },
         theme: {
           extend: {
             fontFamily: {
               sans: ['"Space Grotesk"', '"Manrope"', 'system-ui', 'sans-serif'],
               serif: ['"Source Serif 4"', 'Georgia', 'serif'],
             },
+            spacing: {
+              '1.5': '0.375rem',
+              '2.5': '0.625rem',
+              '3.5': '0.875rem',
+              '4.5': '1.125rem',
+            },
+            colors: {
+              'primary': {
+                DEFAULT: '#4ECDC4',
+                content: '#ffffff',
+              },
+              'secondary': {
+                DEFAULT: '#1B3A52',
+                content: '#ffffff',
+              },
+              'accent': {
+                DEFAULT: '#FF6B35',
+                content: '#ffffff',
+              },
+              'neutral': {
+                DEFAULT: '#0f172a',
+                content: '#f8fafc',
+                800: '#111827',
+              },
+              'base': {
+                100: '#f8f7f2',
+                200: '#f2efe6',
+                300: '#e5e1d8',
+                content: '#0f172a',
+              },
+              'info': '#4ECDC4',
+              'success': {
+                DEFAULT: '#0f766e',
+                content: '#dcfce7',
+              },
+              'warning': '#f97316',
+              'error': '#dc2626',
+              'orange': {
+                50: '#fff7ed',
+                100: '#ffedd5',
+                200: '#fed7aa',
+                300: '#fdba74',
+                800: '#9a3412',
+              },
+            },
             boxShadow: {
               'custom': '0 24px 60px rgba(15, 23, 42, 0.12)',
               'card': '0 14px 40px rgba(15, 23, 42, 0.08)',
               'button': '0 18px 45px rgba(15, 118, 110, 0.25)',
             },
+            borderRadius: {
+              'box': '1rem',
+              'btn': '0.75rem',
+            },
           },
         },
       }
     </script>
+    <!-- DaisyUI CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
     {% if canonical_url %}
     <link rel="canonical" href="{{ canonical_url }}" />
     {% endif %}
